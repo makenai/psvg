@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>parametric SVG editor (beta)</title>
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="css/forms.css" />
+		<link rel="stylesheet" type="text/css" href="css/svg.css" />
+		<script type="text/javascript" src="svgeditor.js"></script>
+	</head>
+	<body onload="init(true);">
+		<div id="outerContainer">
+		<div id="container">
+			<h1>parametric SVG editor (beta)<span id="title"></span></h1>
+			<div id="ieerror">
+				<p>It seems your using Internet Explorer {version}. Since IE is the only browser that doesn't fully support SVG, we would like to ask you to download a browser that does. Like: 
+					<ul>
+						<li><a href="http://www.mozilla.com/firefox/" target="_blank">Mozilla Firefox</a></li>
+						<li><a href="www.opera.com/" target="_blank">Opera</a></li>
+						<li><a href="http://www.chromium.org/" target="_blank">Chromium</a></li>
+						<li><a href="http://www.google.com/chrome" target="_blank">Google Chrome</a></li>
+					</ul>
+				</p>
+			</div>
+			<div id="editor">
+				<div id="frame1" class="frame">
+					<div id="index_menu" class="menu"></div>
+					<h2 id="index_title"></h2>
+					<div id="index"></div>
+				</div>
+				<div id="frame2" class="frame">
+					<div id="edit_menu" class="menu"></div>
+					<h2 id="edit_title"></h2>
+					<div id="edit"></div>
+				</div>
+				<div id="frame3" class="frame">
+					<div id="result_menu" class="menu"></div>				
+					<h2 id="result_title"></h2>				
+					<div id="result"></div>
+					<div id="result_footer"></div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		</div>
+	</body>
+</html>

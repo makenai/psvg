@@ -1,0 +1,4 @@
+<svg width="100mm" height="100mm" transform=""><defs/><title>knoop</title><desc>knoop ovaal, 1x2 cm</desc><ellipse cx="50" cy="50" rx="10" ry="15" style="fill:none;stroke:black;"/><g transform="translate(0 0)"><title>gaatje</title><circle cx="50" cy="45" r="2" style="fill:none;stroke:black;"/></g><g transform="translate(0 0)"><title>gaatje2</title><circle cx="50" cy="55" r="2" style="fill:none;stroke:black;"/></g><g transform="translate(0 0)"><title>gravure</title><ellipse cx="50" cy="50" rx="8" ry="13.5" style="fill:none;stroke:red;"/>
+<ellipse cx="50" cy="50" rx="6" ry="12" style="fill:none;stroke:red;"/>
+<ellipse cx="50" cy="55.5" rx="3.1" ry="5" style="fill:none;stroke:red;"/>
+<ellipse cx="50" cy="44.5" rx="3.1" ry="5" style="fill:none;stroke:red;"/></g></svg>

@@ -1,0 +1,10 @@
+<svg width="210mm" height="297mm" transform=""><defs><ref param="width" default="162"/><ref param="height" default="115"/><ref param="lb" default="15"/><ref param="fh" default="35"/></defs><title>enveloppe</title><desc/><g transform="translate(0 0)"><title>Cut</title><path d="M{lb},{fh}  l{lb},{-fh}  l{width-2*lb},0  l{lb},{fh}" style="fill:none;stroke:black;"/>
+
+<path d="M{lb},{fh} l{-lb},{lb} l0,{height-2*lb} l{lb},{lb}" style="fill:none;stroke:black;"/>
+
+<path d="M{lb+width},{fh} l{lb},{lb} l0,{height-2*lb} l{-lb},{lb}" style="fill:none;stroke:black;"/>
+
+<path d=" M{lb},{fh+height} l{0.5*lb},{height-0.5*fh} l{width-lb},0 l{0.5*lb},{-height+0.5*fh}" style="fill:none;stroke:black;"/>
+
+
+</g><g transform="translate(0 0)"><title>Fold</title><rect x="{lb}" y="{fh}" height="{height}" width="{width}" style="fill:none;stroke:red;"/></g></svg>

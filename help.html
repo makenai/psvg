@@ -1,0 +1,135 @@
+<p id="help_top"/>
+<h2>about</h2><br/>
+The parametric SVG editor is an online tool for construction drawings. You can create parametric SVG drawings for parts and combine existing parts into new designs. You can use the design patterns of others and contribute your own (part) designs to a template library. The parametric SVG editor was created in 2011 by Harmen G. Zijp. All code is available at <a href="http://git.giplt.nl">git.giplt.nl</a> under the <a href="http://www.opensource.org/licenses/simpl-2.0">Simple Public License</a>. Feedback and code contributions are highly appreciated at svg [at] giplt [dot] nl.
+<p/>
+click below to jump to help on a topic:<br/>
+<a href="#help_introduction">introduction</a><br/>
+<a href="#help_index">index</a><br/>
+<a href="#help_project">project settings</a><br/>
+<a href="#help_parameters">parameters</a><br/>
+<a href="#help_code">svg code</a><br/>
+<a href="#help_jointmill">special attributes: 'joint' and 'mill'</a><br/>
+<a href="#help_transform">the transform value</a><br/>
+<a href="#help_image">image</a><br/>
+
+<p id="help_introduction"/>
+<hr/>
+<h2>introduction</h2><br/>
+Scalable Vector Graphics (SVG) are text documents that describe how to make a drawing out of basic elements like lines, circles, rectangles etc. The document is structured in eXtendable Markup Language (XML), which defines how the elements should be written down. For example, a line from (0,0) to (2,3) should be written as <br/>
+<code>&lt;line x1="0" y1="0" x2="2" y2="3" /&gt;</code><br/>
+Because all coordinates are relative to each other the entire drawing can be easily manipulated, scaled, twisted etc.<br/>
+The parametric SVG editor lets you write SVG code and see the resulting graph, and adds the possibility of using parameters and mathematical functions. For example, in stead of <code>x1="0"</code> you can define a parameter 'a' and use <code>x1="{0.5*sin(a)}"</code>. This can be useful when your design needs to be constructed on various scales, out of different materials etc.<br/>
+When you are satisfied with your design and the chosen values for the parameters you can export the design, and have all the parametric values evaluated to actual numbers.<br/>
+Below you will find help on the different frames on the screen, explaning how to use the program.
+<br/><input type="button" onclick="window.location='#help_top'" value="&#8593;" title="back to top"><br/>
+
+<p id="help_index"/>
+<hr/>
+<h2>index</h2><br/>
+This list is your main navigation tool. You can choose to change general project settings or parameters, or to edit the actual SVG code (lines, rectangles etc). The code can be grouped in several objects which have their own code section and can be positioned independently (through translate, rotate or scale operations) in the overall design. The index frame shows all the objects in your design. You can nest objects inside each other, and change their layer arrangement by clicking the up/down buttons. Top in the list is the front layer.
+<br/><input type="button" onclick="window.location='#help_top'" value="&#8593;" title="back to top"><br/>
+
+<p id="help_project"/>
+<hr/>
+<h2>project settings</h2><br/>
+Here you can enter a name and description for the project. The document size is used to determine the size of the image viewbox. This value is also used when you export the design as a concrete (non-parametric) SVG file with actual measures for a computerized construction machine, e.g. a laser cutter, cnc-mill etc. You can use the following units for document size:
+<table>
+	<tr><th>mm</th><td>Millimeters</td></tr>
+	<tr><th>cm</th><td>Centimeters</td></tr>
+	<tr><th>in</th><td>Inches</td></tr>
+	<tr><th>px</th><td>Pixels</td></tr>
+</table>
+<br/>
+The following functions are available in this screen:<br/>
+<table>
+	<tr><th>new</th><td>start a new design</td></tr>
+	<tr><th>load</th><td>load an existing parametric design form file or from the online templae library</td></tr>
+	<tr><th>save</th><td>save your design as a parametric file</td></tr>
+</table>
+<br/><input type="button" onclick="window.location='#help_top'" value="&#8593;" title="back to top"><br/>
+
+<p id="help_parameters"/>
+<hr/>
+<h2>parameters</h2><br/>
+Here you can enter parameters, which will are available throughout all code in all objects. It is also possible to use various mathematical functions. Examples:<br/>
+<code>
+pi=3.14159265<br/>
+r=5<br/>
+theta=pi/2<br/>
+</code>
+You can now replace the numbers in the SVG code by variables or functions, placed within curly brackets. For example:<br/>
+<code>&lt;line x1="0" y1="0" x2="{r*sin(theta)}" y2="{-r*cos(theta)}" /&gt;</code>
+<br/><input type="button" onclick="window.location='#help_top'" value="&#8593;" title="back to top"><br/>
+
+<p id="help_code"/>
+<hr/>
+<h2>svg code</h2><br/>
+Edit the SVG code for the currently selected object, using the following elements:
+<table>
+	<tr><th><i>element</i></th><th><i>example code</i></th></tr>
+	<tr><th>rectangle</th><td><code>&lt;rect x="10" y="10" height="100" width="100"/&gt;</code><td/></tr>
+	<tr><th>circle</th><td><code>&lt;circle cx="50" cy="50" r="25"/&gt;</code></td></tr>
+	<tr><th>ellipse</th><td><code>&lt;ellipse cx="50" cy="50" rx="20" ry="30"/&gt;</code></td></tr>
+	<tr><th>line</th><td><code>&lt;line x1="10" y1="10" x2="70" y2="30"/&gt;</code></td></tr>
+	<tr><th>polyline</th><td><code>&lt;polyline points="0,0 30,0 15,30"/&gt;</code></td></tr>
+	<tr><th>polygon</th><td><code>&lt;polygon points="0,0 50,0 25,50"/&gt;</code></td></tr>
+	<tr><th>path</th><td><code>&lt;path d="M50,50 100,50 75,75 Z"/&gt;</code></td></tr>
+</table>
+More information can be found in these SVG tutorials:<br/>
+<a href="http://www.w3schools.com/svg/" target="new">w3schools</a>, <a href="http://tutorials.jenkov.com/svg/index.html" target="new">jenkov.com</a>, <a href="http://apike.ca/prog_svg.html" target="new">apike.ca</a>
+<p/>
+The following functions are available in this screen:<br/>
+<table>
+	<tr><th>rename</th><td>rename the current object</td></tr>
+	<tr><th>remove</th><td>remove the current object (and all subgroups)</td></tr>
+	<tr><th>insert</th><td>add an empty object into the current object</td></tr>
+	<tr><th>load</th><td>load an existing object into the current object</td></tr>
+</table>
+<br/><input type="button" onclick="window.location='#help_top'" value="&#8593;" title="back to top"><br/>
+
+<p id="help_jointmill"/>
+<hr/>
+<h2>special attributes</h2><br/>
+Two optional attributes have been added to facilitate construction design: 'mill', and 'joint'.
+<p/>
+<h3>mill</h3><br/>
+The attribute 'mill' works in conjunction with the elements 'rect', 'circle', 'ellipse', 'line', 'polyline' and 'polygon'. It converts the element into a toolpath for a cnc mill. The value given is the diameter of the mill, the sign of the value determines which side of the element will be traced.
+<p/>
+<h3>joint</h3><br/>
+The attribute 'joint' is available only for the line element. It constructs a fingerjoint path from the points (x1,y1) to (x2,y2) with the following joint parameters:
+<ol>
+	<li>Material thickness. The sign of this value makes the fingers point inward or outward.</li>
+	<li>Minimum finger width.</li>
+	<li>Extra spacing at the beginning of the joint.</li>
+	<li>Extra spacing at the end of the joint.</li>
+</ol>
+The attributes 'joint' and 'mill' can be used together. Example:<br/>
+<code>&lt;line x1="100" y1="100" x2="300" y2="100" joint="10 30 0 0" mill="-10" style="fill:none;stroke:black;" /&gt;</code>
+<br/><input type="button" onclick="window.location='#help_top'" value="&#8593;" title="back to top"><br/>
+
+<p id="help_transform"/>
+<hr/>
+<h2>transform</h2><br/>
+This string determines how the selected object is drawn. Several operations are available
+<p/>
+<table>
+	<tr><th><i>operation</i></th><th><i>example code</i></th></tr>
+	<tr><th>translate</th><td><code>translate(20, 30)</code></td></tr>
+	<tr><th>rotate</th><td><code>rotate(15)</code></td></tr>
+	<tr><th>scale</th><td><code>scale(-1,0)</code></td></tr>
+</table>
+Several transformations may be combined, and parameters may be used. For example:<br/>
+<code>'translate(20, 30) rotate({angle})'</code>
+<br/><input type="button" onclick="window.location='#help_top'" value="&#8593;" title="back to top"><br/>
+
+<p id="help_image"/>
+<hr/>
+<h2>image</h2><br/>
+This window shows the resulting drawing. When editing code or parameters the program will automatically refresh the drawing when you leave the edited field. You can move separate objects by clicking and dragging. When 'root element' is selected, the whole drawing is moved. You can also zoom in or out, using the '+' and '&#8722;' buttons, or return to the default viewbox pressing '&#8853;'.<br/>
+<p/>
+The following functions are available in this screen:<br/>
+<table>
+	<tr><th>render</th><td>recalculate the results of changes in the code, transform value or parameters</td></tr>
+	<tr><th>export</th><td>save the design as a pure SVG file, i.e. without parameters so that it can be fed to a laser cutter, cnc-mill etc. Don't forget to also save the parametric design too, if you want to work on it later on. To do this, go to 'project settings' and click 'save'</td></tr>
+</table>
+<br/><input type="button" onclick="window.location='#help_top'" value="&#8593;" title="back to top"><br/>

@@ -1,0 +1,45 @@
+.button, input.default, a.user-action, a.link-button, .modal-dialog input.default, button, .gsfn_submit input, .gsfn_no_results input, .bpm-tapper, input.big, input.big-save, a.big-upload-btn, #pages.label #invitation a.user-action, #pages.label #invitation a.link-button, a.upgrade, span.hold, input.small, .actions .button, input.tiny, a.tiny, .medium .actions .button, .icon-button, .icons-group a, body#client_applications.profile .get-it a, .button-center a.link-button { 
+
+position: relative;
+ overflow: visible;
+ display: inline-block;
+ margin: 0;
+ padding: 0 10px !important;
+ border: 1px #cccccc solid;
+ font-size: 12px !important;
+ line-height: 19px !important;
+ height: 19px;
+ color: #333333 !important;
+ cursor: pointer;
+ text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+ white-space: nowrap;
+ text-align: center;
+ -moz-border-radius: 1em;
+ -webkit-border-radius: 1em;
+ -o-border-radius: 1em;
+ -ms-border-radius: 1em;
+ border-radius: 1em;
+ background-color: #e5e5e5;
+ background-image: -webkit-gradient(linear, left top, left bottom, from(white), to(#e5e5e5));
+ background-image: -webkit-linear-gradient(top, white, #e5e5e5);
+ background-image: -moz-linear-gradient(top, white, #e5e5e5);
+ background-image: -ms-linear-gradient(top, white, #e5e5e5);
+ background-image: -o-linear-gradient(top, white, #e5e5e5);
+ background-image: linear-gradient(top, white, #e5e5e5);
+ filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, startColorstr='white', endColorstr='#e5e5e5');
+ -webkit-background-clip: padding;
+ -moz-background-clip: padding;
+ -o-background-clip: padding-box;
+ -ms-background-clip: padding-box;
+ -webkit-transition: border-color 0.2s linear, background-color 0.2s linear, color 0.1s linear, -webkit-box-shadow 0.3s linear, opacity 0.3s linear;
+ -moz-transition: border-color 0.2s linear, background-color 0.2s linear, color 0.1s linear, -moz-box-shadow 0.3s linear, opacity 0.3s linear;
+ -o-transition: border-color 0.2s linear, background-color 0.2s linear, color 0.1s linear, box-shadow 0.3s linear, opacity 0.3s linear;
+ transition: border-color 0.2s linear, background-color 0.2s linear, color 0.1s linear, box-shadow 0.3s linear, opacity 0.3s linear;
+ user-select: none;
+ -khtml-user-select: none;
+ -moz-user-select: none;
+ zoom: 1;
+ *display: inline;
+ 
+}
+

@@ -1,0 +1,10 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="210mm" height="297mm" viewBox="0 0 210 297" preserveAspectRatio="xMinYMin" style="cursor:pointer;"><title>enveloppe</title><desc/><g transform="translate(0)"><title>Cut</title><path d="M15,35  l15,-35  l132,0  l15,35" style="fill:none;stroke:black;"/>
+
+<path d="M15,35 l-15,15 l0,85 l15,15" style="fill:none;stroke:black;"/>
+
+<path d="M177,35 l15,15 l0,85 l-15,15" style="fill:none;stroke:black;"/>
+
+<path d=" M15,150 l7.5,97.5 l147,0 l7.5,-97.5" style="fill:none;stroke:black;"/>
+
+
+</g><g transform="translate(0)"><title>Fold</title><rect x="15" y="35" height="115" width="162" style="fill:none;stroke:red;"/></g><title></title></svg>

@@ -1,0 +1,40 @@
+<svg width="1000mm" height="297mm" transform=""><defs><ref param="length" default="1000"/><ref param="width" default="40"/><ref param="height" default="120"/><ref param="material" default="4"/><ref param="finger" default="10"/><ref param="mill" default="0"/><ref param="space" default="material+mill"/></defs><title>grassrootsbox2</title><desc>plexiglass pressfit box</desc><g transform="translate({space}-206 {space}+205)"><title>bottom</title><line x1="{-material}" y1="{-material}" x2="{length+material}" y2="{-material}" joint="{material} {finger} {material} {material}" mill="{mill}" style="fill:none;stroke:black;"/>
+
+<line x1="{length+material}" y1="{-material}" x2="{length+material}" y2="{width+material}" joint="{material} {finger} {material} {material}" mill="{mill}" style="fill:none;stroke:black;"/>
+
+<line x1="{length+material}" y1="{width+material}" x2="{-material}" y2="{width+material}" joint="{material} {finger} {material} {material}" mill="{mill}" style="fill:none;stroke:black;"/>
+
+<line x1="{-material}" y1="{width+material}" x2="{-material}" y2="{-material}" joint="{material} {finger} {material} {material}" mill="{mill}" style="fill:none;stroke:black;"/>
+
+<circle cx="{length/5}" cy="{width/2-2.5+material}" r="{5}" style="fill:none; stroke:black;"/>
+<circle cx="{2*length/5}" cy="{width/2-2.5+material}" r="{5}" style="fill:none; stroke:black;"/>
+<circle cx="{3*length/5}" cy="{width/2-2.5+material}" r="{5}" style="fill:none; stroke:black;"/>
+<circle cx="{4*length/5}" cy="{width/2-2.5+material}" r="{5}" style="fill:none; stroke:black;"/></g><g transform="translate({length+4*space}-1.02e+3 {space}-156)"><title>front</title><line x1="{-material}" y1="{-material}" x2="{height+material}" y2="{-material}" joint="{material} {finger} {material} {material}" mill="{mill}" style="fill:none;stroke:black;"/>
+
+<line x1="{height+material}" y1="{-material}" x2="{height+material}" y2="{width+material}" mill="{mill}" style="fill:none;stroke:black;"/>
+
+<line x1="{height+material}" y1="{width+material}" x2="{-material}" y2="{width+material}" joint="{material} {finger} {material} {material}" mill="{mill}" style="fill:none;stroke:black;"/>
+
+<line x1="{-material}" y1="{width+material}" x2="{-material}" y2="{-material}" joint="{-material} {finger} {material} {material}" mill="{mill}" style="fill:none;stroke:black;"/>
+</g><g transform="translate({2*length+height+10*space}-1.99e+3 {space}-154)"><title>back</title><line x1="{-material}" y1="{-material}" x2="{height+material}" y2="{-material}" joint="{material} {finger} {material} {material}" mill="{mill}" style="fill:none;stroke:black;"/>
+
+<line x1="{height+material}" y1="{-material}" x2="{height+material}" y2="{width+material}" mill="{mill}" style="fill:none;stroke:black;"/>
+
+<line x1="{height+material}" y1="{width+material}" x2="{-material}" y2="{width+material}" joint="{material} {finger} {material} {material}" mill="{mill}" style="fill:none;stroke:black;"/>
+
+<line x1="{-material}" y1="{width+material}" x2="{-material}" y2="{-material}" joint="{-material} {finger} {material} {material}" mill="{mill}" style="fill:none;stroke:black;"/>
+</g><g transform="translate({space}-212 {width+4*space}-154)"><title>left</title><line x1="{-material}" y1="{-material}" x2="{length+material}" y2="{-material}" mill="{mill}" style="fill:none;stroke:black;"/>
+
+<line x1="{length+material}" y1="{-material}" x2="{length+material}" y2="{height+material}" joint="{-material} {finger} {material} {material}" mill="{mill}" style="fill:none;stroke:black;"/>
+
+<line x1="{length+material}" y1="{height+material}" x2="{-material}" y2="{height+material}" joint="{-material} {finger} {material} {material}" mill="{mill}" style="fill:none;stroke:black;"/>
+
+<line x1="{-material}" y1="{height+material}" x2="{-material}" y2="{-material}" joint="{-material} {finger} {material} {material}" mill="{mill}" style="fill:none;stroke:black;"/>
+</g><g transform="translate({length+height+7*space}-1.32e+3 {width+4*space}+5.83)"><title>right</title><line x1="{-material}" y1="{-material}" x2="{length+material}" y2="{-material}" mill="{mill}" style="fill:none;stroke:black;"/>
+
+<line x1="{length+material}" y1="{-material}" x2="{length+material}" y2="{height+material}" joint="{-material} {finger} {material} {material}" mill="{mill}" style="fill:none;stroke:black;"/>
+
+<line x1="{length+material}" y1="{height+material}" x2="{-material}" y2="{height+material}" joint="{-material} {finger} {material} {material}" mill="{mill}" style="fill:none;stroke:black;"/>
+
+<line x1="{-material}" y1="{height+material}" x2="{-material}" y2="{-material}" joint="{-material} {finger} {material} {material}" mill="{mill}" style="fill:none;stroke:black;"/>
+</g></svg>

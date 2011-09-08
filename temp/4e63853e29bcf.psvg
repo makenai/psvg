@@ -1,0 +1,43 @@
+<svg width=\"210mm\" height=\"297mm\" transform=\"\"><defs><ref param=\"length\" default=\"100\"/><ref param=\"width\" default=\"80\"/><ref param=\"height\" default=\"60\"/><ref param=\"material\" default=\"6\"/><ref param=\"finger\" default=\"20\"/><ref param=\"mill\" default=\"0\"/><ref param=\"space\" default=\"material+mill\"/></defs><title>box5</title><desc>parametric pressfit box</desc><g transform=\"translate({space} {space})\"><title>bottom</title><line x1=\"{-material}\" y1=\"{-material}\" x2=\"{length+material}\" y2=\"{-material}\" joint=\"{material} {finger} {material} {material}\" mill=\"{mill}\" style=\"fill:none;stroke:black;\"/>
+
+<line x1=\"{length+material}\" y1=\"{-material}\" x2=\"{length+material}\" y2=\"{width+material}\" joint=\"{material} {finger} {material} {material}\" mill=\"{mill}\" style=\"fill:none;stroke:black;\"/>
+
+<line x1=\"{length+material}\" y1=\"{width+material}\" x2=\"{-material}\" y2=\"{width+material}\" joint=\"{material} {finger} {material} {material}\" mill=\"{mill}\" style=\"fill:none;stroke:black;\"/>
+
+<line x1=\"{-material}\" y1=\"{width+material}\" x2=\"{-material}\" y2=\"{-material}\" joint=\"{material} {finger} {material} {material}\" mill=\"{mill}\" style=\"fill:none;stroke:black;\"/>
+</g><g transform=\"translate({length+height+7*space} {space})\"><title>top</title><line x1=\"{-material}\" y1=\"{-material}\" x2=\"{length+material}\" y2=\"{-material}\" joint=\"{material} {finger} {material} {material}\" mill=\"{mill}\" style=\"fill:none;stroke:black;\"/>
+
+<line x1=\"{length+material}\" y1=\"{-material}\" x2=\"{length+material}\" y2=\"{width+material}\" joint=\"{material} {finger} {material} {material}\" mill=\"{mill}\" style=\"fill:none;stroke:black;\"/>
+
+<line x1=\"{length+material}\" y1=\"{width+material}\" x2=\"{-material}\" y2=\"{width+material}\" joint=\"{material} {finger} {material} {material}\" mill=\"{mill}\" style=\"fill:none;stroke:black;\"/>
+
+<line x1=\"{-material}\" y1=\"{width+material}\" x2=\"{-material}\" y2=\"{-material}\" joint=\"{material} {finger} {material} {material}\" mill=\"{mill}\" style=\"fill:none;stroke:black;\"/>
+</g><g transform=\"translate({length+4*space} {space})\"><title>front</title><line x1=\"{-material}\" y1=\"{-material}\" x2=\"{height+material}\" y2=\"{-material}\" joint=\"{material} {finger} {material} {material}\" mill=\"{mill}\" style=\"fill:none;stroke:black;\"/>
+
+<line x1=\"{height+material}\" y1=\"{-material}\" x2=\"{height+material}\" y2=\"{width+material}\" joint=\"{-material} {finger} {material} {material}\" mill=\"{mill}\" style=\"fill:none;stroke:black;\"/>
+
+<line x1=\"{height+material}\" y1=\"{width+material}\" x2=\"{-material}\" y2=\"{width+material}\" joint=\"{material} {finger} {material} {material}\" mill=\"{mill}\" style=\"fill:none;stroke:black;\"/>
+
+<line x1=\"{-material}\" y1=\"{width+material}\" x2=\"{-material}\" y2=\"{-material}\" joint=\"{-material} {finger} {material} {material}\" mill=\"{mill}\" style=\"fill:none;stroke:black;\"/>
+</g><g transform=\"translate({2*length+height+10*space} {space})\"><title>back</title><line x1=\"{-material}\" y1=\"{-material}\" x2=\"{height+material}\" y2=\"{-material}\" joint=\"{material} {finger} {material} {material}\" mill=\"{mill}\" style=\"fill:none;stroke:black;\"/>
+
+<line x1=\"{height+material}\" y1=\"{-material}\" x2=\"{height+material}\" y2=\"{width+material}\" joint=\"{-material} {finger} {material} {material}\" mill=\"{mill}\" style=\"fill:none;stroke:black;\"/>
+
+<line x1=\"{height+material}\" y1=\"{width+material}\" x2=\"{-material}\" y2=\"{width+material}\" joint=\"{material} {finger} {material} {material}\" mill=\"{mill}\" style=\"fill:none;stroke:black;\"/>
+
+<line x1=\"{-material}\" y1=\"{width+material}\" x2=\"{-material}\" y2=\"{-material}\" joint=\"{-material} {finger} {material} {material}\" mill=\"{mill}\" style=\"fill:none;stroke:black;\"/>
+</g><g transform=\"translate({space} {width+4*space})\"><title>left</title><line x1=\"0\" y1=\"{-material}\" x2=\"{length}\" y2=\"{-material}\" joint=\"{-material} {finger} 0 0\" mill=\"{mill}\" style=\"fill:none;stroke:black;\"/>
+
+<line x1=\"{length}\" y1=\"{-material}\" x2=\"{length}\" y2=\"{height+material}\" joint=\"{-material} {finger} {material} {material}\" mill=\"{mill}\" style=\"fill:none;stroke:black;\"/>
+
+<line x1=\"{length}\" y1=\"{height+material}\" x2=\"0\" y2=\"{height+material}\" joint=\"{-material} {finger} 0 0\" mill=\"{mill}\" style=\"fill:none;stroke:black;\"/>
+
+<line x1=\"0\" y1=\"{height+material}\" x2=\"0\" y2=\"{-material}\" joint=\"{-material} {finger} {material} {material}\" mill=\"{mill}\" style=\"fill:none;stroke:black;\"/>
+</g><g transform=\"translate({length+height+7*space} {width+4*space})\"><title>right</title><line x1=\"0\" y1=\"{-material}\" x2=\"{length}\" y2=\"{-material}\" joint=\"{-material} {finger} 0 0\" mill=\"{mill}\" style=\"fill:none;stroke:black;\"/>
+
+<line x1=\"{length}\" y1=\"{-material}\" x2=\"{length}\" y2=\"{height+material}\" joint=\"{-material} {finger} {material} {material}\" mill=\"{mill}\" style=\"fill:none;stroke:black;\"/>
+
+<line x1=\"{length}\" y1=\"{height+material}\" x2=\"0\" y2=\"{height+material}\" joint=\"{-material} {finger} 0 0\" mill=\"{mill}\" style=\"fill:none;stroke:black;\"/>
+
+<line x1=\"0\" y1=\"{height+material}\" x2=\"0\" y2=\"{-material}\" joint=\"{-material} {finger} {material} {material}\" mill=\"{mill}\" style=\"fill:none;stroke:black;\"/>
+</g></svg>

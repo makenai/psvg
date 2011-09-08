@@ -1,0 +1,386 @@
+/* ///////// typography /////////// */
+body, textarea, input[type="text"], input[type="password"], input.text, input.title, textarea, select
+{
+	font-family: Georgia, serif;
+	font-size: 10pt;
+}
+#index, textarea.code, input.code
+{
+	font-family: Courier, sans;
+	font-size: 9pt;
+}
+
+h1 {
+	font-size:2em;
+	font-weight:normal;
+	margin:0 0;
+}
+h1 #title {
+	/*float: right;*/
+	position: absolute;
+	right:0;
+}
+
+h2 {
+	font-size:1.2em;
+	font-weight:normal;
+	margin:0 0;
+	display:inline;
+}
+
+h3 {
+	font-size: 8pt;
+	font-weight:bold;
+	margin:0 0 0 2px;
+	display:inline;
+}
+
+/* ///////// global layout /////////// */
+#outerContainer
+{
+	width: 100%;
+    min-width: 1021px;
+    position: relative;
+}
+#container
+{
+	position: absolute;
+	left: 50%;
+	width: 1005px;
+	margin-left: -502.5px;
+}
+#editor 
+{
+	background-color:#ddd;
+}
+.frame 
+{	
+	/*padding: 3px 0 8px 8px;*/
+	margin: 3px 0 7px 8px;
+	float: left;
+	position: relative;
+}
+#frame1
+{
+	width: 180px;
+}
+#frame2
+{
+}
+#frame3
+{
+	width: 400px;
+}
+.clear
+{
+	clear:both
+}
+/* ///////// menu's /////////// */
+.menu
+{
+	float: right;
+	/*position: absolute;
+	right: 0;*/
+	text-align: right;
+}
+.menu .button
+{
+	margin: 5px 0 0 0;
+}
+/*.button
+{
+	border: 1px #666 solid;
+	line-height: 1px;
+	padding-bottom: 4px;
+	height: 19px;
+	text-align: center;
+	background-color: #333;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#555), to(#000));
+	background-image: -webkit-linear-gradient(top, #555, #000);
+	background-image: -moz-linear-gradient(top, #555, #000);
+	background-image: -ms-linear-gradient(top, #555, #000);
+	background-image: -o-linear-gradient(top, #555, #000);
+	background-image: linear-gradient(top, #555, #000);
+	filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, startColorstr='#555555', endColorstr='#000000');
+	color: #eee;
+}
+.button:hover 
+{
+	border: 1px #5f9191 solid;
+	background-color: #75b2b2;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#5f9191), to(#75b2b2));
+	background-image: -webkit-linear-gradient(top, #5f9191, #75b2b2);
+	background-image: -moz-linear-gradient(top, #5f9191, #75b2b2);
+	background-image: -ms-linear-gradient(top, #5f9191, #75b2b2);
+	background-image: -o-linear-gradient(top, #5f9191, #75b2b2);
+	background-image: linear-gradient(top, #5f9191, #75b2b2);
+	filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, startColorstr='#5f9191', endColorstr='#75b2b2');
+	color: #fff;
+}*/
+.button
+{
+	border: 1px #666 solid;
+	line-height: 1px;
+	padding-bottom: 4px;
+	height: 19px;
+	text-align: center;
+	background-color: #333;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#555), to(#000));
+	background-image: -webkit-linear-gradient(top, #555, #000);
+	background-image: -moz-linear-gradient(top, #555, #000);
+	background-image: -ms-linear-gradient(top, #555, #000);
+	background-image: -o-linear-gradient(top, #555, #000);
+	background-image: linear-gradient(top, #555, #000);
+	filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, startColorstr='#555555', endColorstr='#000000');
+	color: #eee;
+}
+.button:hover 
+{
+	border: 1px #5f9191 solid;
+	background-color: #75b2b2;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#3F83FF), to(#286BAA));
+	background-image: -webkit-linear-gradient(top, #3F83FF, #286BAA);
+	background-image: -moz-linear-gradient(top, #3F83FF, #286BAA);
+	background-image: -ms-linear-gradient(top, #3F83FF, #286BAA);
+	background-image: -o-linear-gradient(top, #3F83FF, #286BAA);
+	background-image: linear-gradient(top, #3F83FF, #286BAA);
+	filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, startColorstr='#3F83FF', endColorstr='#286BAA');
+	color: #fff;
+}
+.button[disabled]
+{
+	background-color: #aaa;
+	border: 1px #999 solid;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#aaa), to(#666));
+	background-image: -webkit-linear-gradient(top, #aaa, #666);
+	background-image: -moz-linear-gradient(top, #aaa, #666);
+	background-image: -ms-linear-gradient(top, #aaa, #666);
+	background-image: -o-linear-gradient(top, #aaa, #666);
+	background-image: linear-gradient(top, #aaa, #666);
+	filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, startColorstr='#aaa', endColorstr='#666');
+	color: #eee;
+}
+
+/* ///////// frame 1: index /////////// */
+#index {
+	height:420px;
+	background-color:#eee;
+	overflow-y:auto;
+	overflow-x:hidden;
+}
+.indexItem {
+	font-size:small;
+	cursor:pointer;
+	padding: 0 5px;
+}
+.indexItem:hover {
+	background-color:#ddd;
+}
+.indexItem.selected {
+	/*font-weight: bold;*/
+	background-color: #84caff;
+}
+/* ///////// frame 2: edit /////////// */
+.codeTitle
+{
+	/*margin-top: 10px;*/
+	display: block;
+}
+#result {
+	height:400px;
+}
+#frame2 textarea, #frame2 input.text
+{
+	width: 380px;
+}
+#frame2 #editwidth, #frame2 #editheight
+{
+	width: 30px;
+}
+#editdesc
+{
+	height: 329px;
+}
+#params
+{
+	height: 416px;
+}
+#editcode
+{
+	height: 357px;
+}
+#units
+{
+	margin: 0 0 0 5px;
+}
+/* ///////// frame 3: results /////////// */
+#frame3
+{
+	margin-bottom: 0;
+}
+#result_footer
+{
+}
+#result
+{
+	margin-bottom: 22px;
+	overflow: hidden;
+	widht: 400px;
+	height: 400px;
+}
+#result.help
+{
+	overflow: auto;
+}
+svg, object, embed
+{ 
+	overflow: hidden; 
+}
+#frame3 table
+{
+	width: 100%;
+}
+#libraryFiles
+{
+	padding: 8px 0 0 0;
+}
+#libraryFiles .libraryitem
+{
+	clear: both;
+	margin: 0 0 8px 0;
+	width: 100%;
+	border: solid thin transparent;
+}
+#libraryFiles .libraryitem:hover
+{
+	border: thin solid #416B90;
+	cursor: pointer;
+}
+#libraryFiles .libraryitem object
+{
+	float: left;
+	margin: 0 8px 0 0;
+	border: thin solid #BBBBBB;
+}
+#libraryFiles .libraryitem h3 
+{
+	/*float: left;*/
+	display: block;
+	margin: 0;
+	line-height: 1;
+}
+#libraryFiles .libraryitem h3 a
+{
+	font-size: 14pt;
+	font-weight: normal;
+	color: #000;
+	text-decoration: none;
+}
+#libraryFiles .libraryitem h3 a:hover
+{
+	color: #416B90;
+}
+#libraryFiles .libraryitem:hover a
+{
+	color: #416B90;
+}
+#libraryFiles .libraryitem p
+{
+}
+#frame3 label
+{
+	display: inline;
+    float: left;
+    font-weight: normal;
+    width: 100px;
+    clear: left;
+}
+#frame3 hr
+{
+    clear: both;
+    float: left;
+    width: 100%;
+}
+#frame3 input, #frame3 select, #frame3 span
+{
+    float: left;
+}
+#frame3 input.checkbox
+{
+	margin: 0 3px 0 0;
+}
+#frame3 #progressbar
+{
+	display: block;
+	clear: both;
+}
+#frame3 #result>div
+{
+	float: left;
+	width: 100%;
+}
+#frame3 #result h3
+{
+	display: block;
+	font-size: 12pt;
+	font-weight: normal;
+	color: #000;
+	text-decoration: none;
+	margin: 0;
+}
+/* ///////// forms /////////// */
+input[type="text"], input[type="password"], input.text, input.title, textarea, select
+{
+	padding: 2px 4px;
+	margin: 0;
+}
+
+/* ///////// ieerror /////////// */
+#ieerror
+{
+	margin-bottom: 10px;
+	background-color: #ffa3a3;
+	border: 1px #ff5e5b solid;
+	padding: 10px; 
+	display: none;
+}
+#ieerror ul
+{
+	list-style: inside;
+}
+#ieerror a
+{
+	color: #0E6161;
+}
+
+/* ///////// others /////////// */
+#editor , #index, #result
+{
+	border:thin solid #bbb;
+}
+/*#editor , #index, #result, textarea, input.text
+{
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+}*/
+#result, #editcode, #params, #index
+{
+	margin: 5px 0 0 0;
+}
+
+.image {
+	background-color:#fff;
+}
+
+.help {
+	font-family:sans;
+	font-size:small;
+	text-align:justify;
+	overflow-y:auto;
+	background-color:#ddd;
+	border: thin black solid;
+	padding:8px;
+}
+.click {
+	cursor:pointer;
+}

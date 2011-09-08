@@ -1,0 +1,234 @@
+/* ///////// typography /////////// */
+body, textarea, input[type="text"], input[type="password"], input.text, input.title, textarea, select
+{
+	font-family: Georgia, serif;
+	font-size: 10pt;
+}
+#index, textarea.code, input.code
+{
+	font-family: Courier, sans;
+	font-size: 9pt;
+}
+
+h1 {
+	font-size:2em;
+	font-weight:normal;
+	margin:0 0;
+}
+h1 #title {
+	/*float: right;*/
+	position: absolute;
+	right:0;
+}
+
+h2 {
+	font-size:1.2em;
+	font-weight:normal;
+	margin:0 0;
+	display:inline;
+}
+
+h3 {
+	font-size: 8pt;
+	font-weight:bold;
+	margin:0 0 0 2px;
+	display:inline;
+}
+
+/* ///////// global layout /////////// */
+#container
+{
+	position: absolute;
+	left: 50%;
+	width: 1005px;
+	margin-left: -502.5px;
+}
+#editor 
+{
+	background-color:#ddd;
+}
+.frame 
+{	
+	/*padding: 3px 0 8px 8px;*/
+	margin: 3px 0 7px 8px;
+	float: left;
+	position: relative;
+}
+#frame1
+{
+	width: 180px;
+}
+#frame2
+{
+}
+#frame3
+{
+	width: 400px;
+}
+#index, #result
+{
+	margin: 5px 0 0 0;
+}
+.clear
+{
+	clear:both
+}
+/* ///////// menu's /////////// */
+.menu
+{
+	/*float: right;*/
+	position: absolute;
+	right: 0;
+	text-align: right;	
+}
+.menu .button
+{
+	margin: 5px 0 0 0;
+}
+
+/* ///////// frame 1: index /////////// */
+#index {
+	height:420px;
+	background-color:#eee;
+	/*overflow-y:auto; made index small because of index menu*/
+}
+.indexItem {
+	font-size:small;
+	cursor:pointer;
+	padding: 0 5px;
+}
+.indexItem:hover {
+	background-color:#ddd;
+}
+.indexItem.selected {
+	/*font-weight: bold;*/
+	background-color: #87cccc;
+}
+/* ///////// frame 2: edit /////////// */
+.codeTitle
+{
+	margin-top: 10px;
+	display: block;
+}
+#edit_menu {}
+#result {
+	height:400px;
+}
+#frame2 textarea, #frame2 input.text
+{
+	width: 380px;
+}
+#frame2 #editwidth, #frame2 #editheight
+{
+	width: 50px;
+}
+#editdesc
+{
+	height: 329px;
+}
+#params
+{
+	height: 421px;
+}
+#editcode
+{
+	height: 360px;
+}
+/* ///////// frame 3: results /////////// */
+#result_title
+{
+	margin-bottom: 10px;
+	display: block;
+}
+#frame3
+{
+	margin-bottom: 0;
+}
+#result_footer
+{
+	bottom: 0px;
+    position: absolute;
+}
+#result
+{
+	margin-bottom: 22px;
+}
+
+/*forms*/
+input[type="text"], input[type="password"], input.text, input.title, textarea, select
+{
+	padding: 2px 4px;
+	margin: 0;
+}
+
+
+/* others */
+#editor , #index, #result
+{
+	border:thin solid #bbb;
+}
+/*#editor , #index, #result, textarea, input.text
+{
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+}*/
+#ieerror
+{
+	margin-bottom: 10px;
+	background-color: #ffa3a3;
+	border: 1px #ff5e5b solid;
+	padding: 10px; 
+	display: none;
+}
+#ieerror ul
+{
+	list-style: inside;
+}
+.image {
+	background-color:#fff;
+}
+
+.help {
+	font-family:sans;
+	font-size:small;
+	text-align:justify;
+	overflow-y:auto;
+	background-color:#ddd;
+	border: thin black solid;
+	padding:5px;
+}
+.click {
+	cursor:pointer;
+}
+svg { overflow: hidden; }
+
+.button
+{
+	border: 1px #666 solid;
+	line-height: 1px;
+	padding-bottom: 4px;
+	height: 19px;
+	text-align: center;
+	background-color: #333;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#555), to(#000));
+	background-image: -webkit-linear-gradient(top, #555, #000);
+	background-image: -moz-linear-gradient(top, #555, #000);
+	background-image: -ms-linear-gradient(top, #555, #000);
+	background-image: -o-linear-gradient(top, #555, #000);
+	background-image: linear-gradient(top, #555, #000);
+	filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, startColorstr='#555', endColorstr='#000');
+	color: #eee;
+}
+.button:hover 
+{
+	border: 1px #5f9191 solid;
+	background-color: #75b2b2;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#5f9191), to(#75b2b2));
+	background-image: -webkit-linear-gradient(top, #5f9191, #75b2b2);
+	background-image: -moz-linear-gradient(top, #5f9191, #75b2b2);
+	background-image: -ms-linear-gradient(top, #5f9191, #75b2b2);
+	background-image: -o-linear-gradient(top, #5f9191, #75b2b2);
+	background-image: linear-gradient(top, #5f9191, #75b2b2);
+	filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, startColorstr='#5f9191', endColorstr='#75b2b2');
+	color: #fff;
+}

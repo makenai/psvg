@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>parametric SVG editor (beta)</title>
+		<script>
+		
+			function loadedSvgPreview(currentPreview)
+			{
+				alert("loadedSvgPreview");
+				//console.group("loadedSvgPreview");
+				console.log("currentPreview: ",currentPreview);
+				console.log("currentPreview.childNodes: ",currentPreview.childNodes);
+			
+				var svgDoc = currentPreview.getSVGDocument();
+				var svg = svgDoc.firstChild;
+				console.log("svg: ",svg);
+				
+				var title = "";
+				var desc = "";
+				
+				for(var i=0;i<svg.childNodes.length;i++)
+				{
+					var childNode = svg.childNodes[i];
+					console.log("  childNode.tagName: ",childNode.tagName);
+					switch(childNode.tagName)
+					{
+						case "title":
+							if(childNode.childNodes.length > 0)
+								title = childNode.firstChild.nodeValue;
+							break;
+						case "desc":
+							if(childNode.childNodes.length > 0)
+								desc = childNode.firstChild.nodeValue;
+							break;
+					}
+				}
+				console.log("title: ", title);
+				console.log("desc: ", desc);
+				
+				/*var libraryItem = currentPreview.parentNode;
+				var titleNode = libraryItem.getElementsByTagName("h3")[0];
+				var aNode = titleNode.firstChild;
+				aNode.firstChild.nodeValue = title;
+				console.log("titleNode: ", titleNode);
+				console.log("aNode: ", aNode);
+				
+				var pNode = libraryItem.getElementsByTagName("p")[0];
+				pNode.firstChild.nodeValue = desc;
+				console.log("pNode: ", pNode);*/
+				
+				//console.groupEnd();
+			}
+		</script>
+	</head>
+	<body>
+		<!--<embed width="300" height="300" type="image/svg+xml" src="library/construction/box.svg" onload="loadedSvgPreview(this);">-->
+		<object width="300" height="300" type="image/svg+xml" data="library/construction/box.svg" onload="loadedSvgPreview(this);"></object>
+	</body>
+</html>

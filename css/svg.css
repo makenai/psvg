@@ -328,6 +328,23 @@ svg, object, embed
 	text-decoration: none;
 	margin: 0;
 }
+
+/* ///////// footer /////////// */
+#footer
+{
+	text-align: right;
+	color: #aaa;
+	font-size: 8pt;
+}
+#footer a
+{
+	color: #3F83FF;
+}
+#footer a:hover
+{
+	color: #225BDE;
+}
+
 /* ///////// forms /////////// */
 input[type="text"], input[type="password"], input.text, input.title, textarea, select
 {

@@ -421,15 +421,20 @@ function createSelectionSVG()
 	selectionPSVG.setAttributeNS(null,'width', '100');
 	selectionPSVG.setAttributeNS(null,'height', '100');
 }
+function removeVisualSelect()
+{
+	if(selectionPSVG.parentNode != undefined)
+		selectionPSVG.parentNode.removeChild(selectionPSVG);
+	selectedSVG = null;
+}
 function updateVisualSelect()
 {
+	//console.group("updateVisualSelect");
 	var selectedNode = index[selected];
 	//console.log("selectedNode: ",selectedNode);
 	if(selectedNode == undefined)
 	{
-		if(selectionPSVG.parentNode != undefined)
-			selectionPSVG.parentNode.removeChild(selectionPSVG);
-		selectedSVG = null;
+		removeVisualSelect();
 	}
 	else
 	{
@@ -438,6 +443,7 @@ function updateVisualSelect()
 		//var bb = dragnode.getBBox();
 		//var bb = selectedSVG.getBounds();
 		//var bb = selectedSVG.getBoundingClientRect();
+		
 		var bb = selectedSVG.getBBox();
 		
 		var strokeWidth = parseFloat(selectionPSVG.getAttributeNS(null,'stroke-width'));
@@ -453,6 +459,7 @@ function updateVisualSelect()
 	//console.log("selectionPSVG: ",selectionPSVG);
 	
 	//buildsvg();
+	//console.groupEnd();
 }
 function getSelectedSVG()
 {
@@ -504,6 +511,7 @@ function getChildByTitle(svgNode,title)
 function update(element) {
 	//console.group("update");
 	//console.log("element: ",element);
+	//console.log("resultState: ",resultState);
 	switch(element) {
 		case 'title':
 		
@@ -515,18 +523,32 @@ function update(element) {
 			
 			if(resultState == RESULT_STATE_SAVE)
 			{
+				document.getElementById('saveTitle').value = editTitleNode.value;
+				
 				var filenameLibrary = document.getElementById('filenameLibrary');
 				filenameLibrary.value = editTitleNode.value+psvgE;
 				//console.log("filenameLibrary.value: ",filenameLibrary.value);
 				validateSaveForm();
 			}
-			//@@@
 			//console.log("resultState: ",resultState);
+			//console.log("  resultState: ",resultState);
+			//console.log("  RESULT_STATE_SAVE: ",RESULT_STATE_SAVE);
 			if(resultState != RESULT_STATE_SAVE)
 			{
 				buildindex();
 				select('project');
 			}
+			break;
+		case 'saveTitle':
+
+			var saveTitleNode = document.getElementById('saveTitle');
+			var editTitleNode = document.getElementById('edittitle');
+			editTitleNode.value = saveTitleNode.value;
+			
+			//console.log("  editTitleNode.value: ",editTitleNode.value);
+			
+			update('title');
+			
 			break;
 		case 'description':
 			setNodeXML(code.getElementsByTagName('desc')[0], document.getElementById('editdesc').value);
@@ -579,7 +601,7 @@ function update(element) {
 			break;
 	}
 	//console.log("dragnode: ",dragnode);
-	if(!((element == 'title' || element == 'description') && resultState == RESULT_STATE_SAVE))
+	if(!((element == 'title' || element == 'saveTitle' || element == 'description') && resultState == RESULT_STATE_SAVE))
 	{
 		buildsvg();
 	}
@@ -640,6 +662,7 @@ function renameobject() {
 }
 function duplicateObject() {
 	var selectedSVG = index[selected];
+	removeVisualSelect();
 	var cloneSVG = selectedSVG.cloneNode(true);
 	
 	var selectedName = getNodeTitle(cloneSVG);
@@ -1051,7 +1074,7 @@ function gotoExport()
 	//ajaxGet('svg.php?id=getLibraryCategories&purpose=save', 'libraryCategories');
 	//console.groupEnd();
 }
-
+	
 function gotoSave(filetype) 
 {
 
@@ -1070,7 +1093,8 @@ function gotoSave(filetype)
 	html+= '<div>';
 	html+= '<h3>save svg code to online template library</h3>';
 	html+= '<form id="uploadform" action="svg.php?id=uploadFile&destination=server" method="post" enctype="multipart/form-data">';
-	html+= '<label>name</label><input type="text" name="name" id="name" value="" onchange="validateSaveForm();"/>';
+	html+= '<label>title</label><input type="text" name="title" id="saveTitle" value="'+document.getElementById('edittitle').value+'" onchange="update(\'saveTitle\');"/>';
+	html+= '<label>your name</label><input type="text" name="name" id="name" value="" onchange="validateSaveForm();"/>';
 	html+= '<label>email address</label><input type="text" name="email" id="email" value="" onchange="validateSaveForm();"/>';
 	html+= '<label>&nbsp;</label><input type="checkbox" class="checkbox" name="newsletter" value="newsletter" /><span>inform me about updates</span>';
 
@@ -1104,7 +1128,10 @@ function loadxml(txt) {
 	
 	if (window.DOMParser) {
 		parser = new DOMParser();
+		//xml = parser.parseFromString(txt,"text/xml");
 		xml = parser.parseFromString(txt,"text/xml");
+		if(xml.documentElement.nodeName == "parsererror")
+			return "";
 	}
 	else {
 		xml = new ActiveXObject("Microsoft.XMLDOM");
@@ -1129,10 +1156,15 @@ function getNodeXML (node) {
 
 // parse string into XML node
 function setNodeXML (node, contents) {
+	//console.log("setNodeXML");
 	contents = '<svg>' + contents + '</svg>';
 	if (window.DOMParser) {
 		parser = new DOMParser();
-		xml = parser.parseFromString(contents, "text/xml");
+		//xml = parser.parseFromString(contents, "text/xml");
+		xml = parser.parseFromString(contents,"text/xml");
+		//console.log("xml.documentElement.nodeName: ",xml.documentElement.nodeName);
+		if(xml.documentElement.nodeName == "parsererror")
+			return;
 	}
 	else {
 		xml = new ActiveXObject("Microsoft.XMLDOM");

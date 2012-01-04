@@ -1331,7 +1331,7 @@ function p2c(node) {
 	}
 	
 	// create svg node
-	var svgnode = svg.ownerDocument.createElementNS('http://www.w3.org/2000/svg', 'svg:' + element);
+	var svgnode = svg.ownerDocument.createElementNS('http://www.w3.org/2000/svg', element);
 	for (name in attributes) svgnode.setAttributeNS(null, name, attributes[name]);
 	
 	// convert the node's children to svgnodes
@@ -1551,8 +1551,23 @@ function getCode(node) {
 			default: code+= getNodeXML(subnode);
 		}
 	}
+	
+	// make path code more readable
+	// find all path's with path data
+	code = code.replace(/<path.*?d="[^"]*".*?\/>/gi,addNewLinesToPathData);
 	return code;
 }
+function addNewLinesToPathData(match)
+{
+	// extract path data
+	var pathData = match.replace(/.*?d="([^"]*)".*/i,'$1');
+	// replace all commands (M,L etc.) (and everything begind them exept other commands) with a newline and a command 
+	pathData = pathData.replace(/\b[a-z](\b)?(({[^}]*})|[^a-z])*/gi,'\n$&');
+	// replace old path data with new
+	var newPath = match.replace(/(d=")[^"]*(".*?\/>)/i,'$1'+pathData+'\n$2');
+	return newPath;
+}
+
 function getTranslate(node) {
 	if (node!=code.documentElement && node.getAttribute('id')!='project' && node.getAttribute('id')!='parameters') {
 		transform = node.getAttribute('transform');

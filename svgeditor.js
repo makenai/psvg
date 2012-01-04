@@ -440,20 +440,22 @@ function updateVisualSelect()
 	{
 		var selectedSVG = getSelectedSVG();
 		
-		//var bb = dragnode.getBBox();
-		//var bb = selectedSVG.getBounds();
-		//var bb = selectedSVG.getBoundingClientRect();
-		
-		var bb = selectedSVG.getBBox();
-		
-		var strokeWidth = parseFloat(selectionPSVG.getAttributeNS(null,'stroke-width'));
-		//console.log("strokeWidth: ",strokeWidth);
-		selectionPSVG.setAttributeNS(null,'x', bb.x-strokeWidth/2);
-		selectionPSVG.setAttributeNS(null,'y', bb.y-strokeWidth/2);
-		selectionPSVG.setAttributeNS(null,'width', bb.width+strokeWidth);
-		selectionPSVG.setAttributeNS(null,'height', bb.height+strokeWidth);
-		
-		selectedNode.appendChild(selectionPSVG); // insertBefore
+		if(selectedSVG)
+		{
+			//var bb = dragnode.getBBox();
+			//var bb = selectedSVG.getBounds();
+			//var bb = selectedSVG.getBoundingClientRect();
+			var bb = selectedSVG.getBBox();
+			
+			var strokeWidth = parseFloat(selectionPSVG.getAttributeNS(null,'stroke-width'));
+			//console.log("strokeWidth: ",strokeWidth);
+			selectionPSVG.setAttributeNS(null,'x', bb.x-strokeWidth/2);
+			selectionPSVG.setAttributeNS(null,'y', bb.y-strokeWidth/2);
+			selectionPSVG.setAttributeNS(null,'width', bb.width+strokeWidth);
+			selectionPSVG.setAttributeNS(null,'height', bb.height+strokeWidth);
+			
+			selectedNode.appendChild(selectionPSVG); // insertBefore
+		}
 	}
 	
 	//console.log("selectionPSVG: ",selectionPSVG);
@@ -478,7 +480,7 @@ function getSelectedSVG()
 			svgNode = getChildByTitle(svgNode,titles[i]);
 		}
 	}
-	//console.log("svgNode: ",svgNode);
+	//console.log("final svgNode: ",svgNode);
 	//console.groupEnd();
 	return svgNode;
 }
@@ -931,6 +933,8 @@ function saveFile() {
 function exportFile() {
 	//console.group("exportFile");
 	//console.log("svg",svg);
+	
+	
 	
 	// locate selector inside svg and temporarily remove it
 	var selectedSVG = getSelectedSVG();
@@ -1548,13 +1552,19 @@ function getCode(node) {
 			case 'desc': break;
 			case 'defs': break;
 			case 'g': break;
-			default: code+= getNodeXML(subnode);
+			default: 
+				code+= getNodeXML(subnode);
+				
+				// make path code more readable (replace all path's with path data)
+				code = code.replace(/<path.*?d="[^"]*".*?\/>/gi,addNewLinesToPathData);
+				// remove the possible selection rectangle
+				code = code.replace(/<rect.*?id="selector"[^\/]*?\/>/gi,'');
+				
+				break;
 		}
 	}
 	
-	// make path code more readable
-	// find all path's with path data
-	code = code.replace(/<path.*?d="[^"]*".*?\/>/gi,addNewLinesToPathData);
+	
 	return code;
 }
 function addNewLinesToPathData(match)

@@ -1544,37 +1544,57 @@ function getDescription(node) {
 	return '';
 }
 function getCode(node) {
+	//console.group("getCode");
 	var code = '';
+	//console.log("node.childNodes: ",node.childNodes);
 	for(var i=0;i<node.childNodes.length;i++) {
 		subnode = node.childNodes[i];
+		//console.log("subnode.tagName: ",subnode.tagName);
 		switch(subnode.tagName) {
 			case 'title': break;
 			case 'desc': break;
 			case 'defs': break;
 			case 'g': break;
 			default: 
-				code+= getNodeXML(subnode);
+				//code += getNodeXML(subnode);			
+				var newCode = getNodeXML(subnode);
 				
-				// make path code more readable (replace all path's with path data)
-				code = code.replace(/<path.*?d="[^"]*".*?\/>/gi,addNewLinesToPathData);
-				// remove the possible selection rectangle
-				code = code.replace(/<rect.*?id="selector"[^\/]*?\/>/gi,'');
+				if(subnode.tagName) //don't edit newlines
+				{
+					switch(subnode.tagName)
+					{
+						case 'path':
+							//make path data more readable
+							newCode = addNewLinesToPathData(newCode)
+							break;
+						case 'rect':
+							// remove the possible selection rectangle
+							var id = subnode.getAttributeNS(null,'id');
+							if(id == "selector") newCode = '';
+							break;
+					}
+				}
 				
-				break;
+				code += newCode;
 		}
 	}
 	
-	
+	//console.groupEnd();
 	return code;
 }
 function addNewLinesToPathData(match)
 {
+	//console.log("match: ",match);
+
 	// extract path data
 	var pathData = match.replace(/.*?d="([^"]*)".*/i,'$1');
+	//console.log("pathData: ",pathData);
 	// replace all commands (M,L etc.) (and everything begind them exept other commands) with a newline and a command 
 	pathData = pathData.replace(/\b[a-z](\b)?(({[^}]*})|[^a-z])*/gi,'\n$&');
+	//console.log("new pathData: ",pathData);
 	// replace old path data with new
 	var newPath = match.replace(/(d=")[^"]*(".*?\/>)/i,'$1'+pathData+'\n$2');
+	//console.log("newPath: ",newPath);
 	return newPath;
 }
 

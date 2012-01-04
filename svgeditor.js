@@ -1134,6 +1134,7 @@ function loadxml(txt) {
 		parser = new DOMParser();
 		//xml = parser.parseFromString(txt,"text/xml");
 		xml = parser.parseFromString(txt,"text/xml");
+		//console.log("xml: ",xml);
 		if(xml.documentElement.nodeName == "parsererror")
 			return "";
 	}
@@ -1166,9 +1167,28 @@ function setNodeXML (node, contents) {
 		parser = new DOMParser();
 		//xml = parser.parseFromString(contents, "text/xml");
 		xml = parser.parseFromString(contents,"text/xml");
+		//console.log("xml.documentElement: ",xml.documentElement);
 		//console.log("xml.documentElement.nodeName: ",xml.documentElement.nodeName);
 		if(xml.documentElement.nodeName == "parsererror")
+		{
+			alert("Syntax error in code. While there is a syntax error, code will not be stored");
 			return;
+		}
+		else if(xml.documentElement.nodeName == "svg")
+		{
+			//console.log("==svg")
+			var firstChild = xml.documentElement.firstChild;
+			//console.log("firstChild: ",firstChild);
+			//console.log("firstChild.innerText: ",firstChild.innerText);
+			if(firstChild.innerText && firstChild.innerText.search('This page contains the following errors:') != -1)
+			{
+				var errorInfo = firstChild.innerText;
+				errorInfo = errorInfo.replace('This page contains the following errors:','');
+				errorInfo = errorInfo.replace('\nBelow is a rendering of the page up to the first error.','');			
+				alert("Syntax error in code. While there is a syntax error, code will not be stored. More info: \n"+errorInfo);
+				return;
+			}
+		}
 	}
 	else {
 		xml = new ActiveXObject("Microsoft.XMLDOM");

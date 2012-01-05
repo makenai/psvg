@@ -351,7 +351,13 @@ function select(id) {
 			//console.log("codeCursorPos: ",codeCursorPos);
 			
 			html+= '<h3 class="codeTitle">'+getNodeTitle(node)+'</h3><textarea id="editcode" class="code" onfocus="disableRenderButton(false);" onblur="update(\'code\');" onselect="onCodeSelect(this)" onmousedown="onCodeMouseDown(this)">' + getCode(node) + '</textarea><br/>';
-			if (node!=code.documentElement) html+= '<h3>transform</h3><br/><input id="edittransform" class="code text" type="text" value="' + node.getAttribute('transform') + '" onfocus="disableRenderButton(false);" onblur="update(\'transform\');" />';
+			if (node!=code.documentElement)
+			{
+				var transform = node.getAttribute('transform');
+				if(transform == null)
+					transform = 'translate(0 0)';
+				html+= '<h3>transform</h3><br/><input id="edittransform" class="code text" type="text" value="' + transform + '" onfocus="disableRenderButton(false);" onblur="update(\'transform\');" />';
+			}
 			document.getElementById('edit').innerHTML = html;
 			var indexmenu = '';
 			if (node!=code.documentElement) {
@@ -1593,7 +1599,13 @@ function getCode(node) {
 							if(id == "selector") newCode = '';
 							break;
 					}
+					
+					// remove namespace you get when load existing svg's
+					newCode = newCode.replace(/ xmlns="[^"]*"/gi,'');	
 				}
+				
+				// remove tabs you get when loading existing svg's
+				newCode = newCode.replace(/\t+/,'\n');
 				
 				code += newCode;
 		}

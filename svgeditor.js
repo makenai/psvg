@@ -1362,7 +1362,15 @@ function p2c(node) {
 	
 	// create svg node
 	var svgnode = svg.ownerDocument.createElementNS('http://www.w3.org/2000/svg', element);
-	for (name in attributes) svgnode.setAttributeNS(null, name, attributes[name]);
+	
+	for (name in attributes)
+	{
+		var nameParts = name.split(':');
+		if(nameParts.length == 2)
+			svgnode.setAttributeNS(nameParts[0], nameParts[1], attributes[name]);
+		else
+			svgnode.setAttributeNS(null, name, attributes[name]);
+	}
 	
 	// convert the node's children to svgnodes
 	if (node.childNodes) if (node.childNodes.length) for(var i=0; i<node.childNodes.length; i++) switch(node.childNodes[i].nodeType) {
@@ -1580,6 +1588,8 @@ function getCode(node) {
 			case 'title': break;
 			case 'desc': break;
 			case 'defs': break;
+			case 'sodipodi:namedview': break; // created by Inkscape not usefull here
+			case 'metadata': break; // created by Inkscape not usefull here
 			case 'g': break;
 			default: 
 				//code += getNodeXML(subnode);			
@@ -1601,11 +1611,14 @@ function getCode(node) {
 					}
 					
 					// remove namespace you get when load existing svg's
-					newCode = newCode.replace(/ xmlns="[^"]*"/gi,'');	
+					newCode = newCode.replace(/ xmlns[^=]*="[^"]*"/gi,'');	
+					
+					// remove sodipodi namespace inkscape creates (seem useless?)
+					newCode = newCode.replace(/sodipodi:/g,'');	
 				}
 				
-				// remove tabs you get when loading existing svg's
-				newCode = newCode.replace(/\t+/,'\n');
+				// remove tabs/spaces before elements you get when loading existing svg's
+				newCode = newCode.replace(/\s+/,'\n');
 				
 				code += newCode;
 		}
@@ -1619,7 +1632,7 @@ function addNewLinesToPathData(match)
 	//console.log("match: ",match);
 
 	// extract path data
-	var pathData = match.replace(/.*?d="([^"]*)".*/i,'$1');
+	var pathData = match.replace(/.*?\sd="([^"]*)".*/i,'$1');
 	//console.log("pathData: ",pathData);
 	// replace all commands (M,L etc.) (and everything begind them exept other commands) with a newline and a command 
 	pathData = pathData.replace(/\b[a-z](\b)?(({[^}]*})|[^a-z])*/gi,'\n$&');

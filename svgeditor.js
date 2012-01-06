@@ -149,6 +149,17 @@ function setupsvg() {
 	svg.setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink');
 	svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
 	
+	// add other namespaces from original file
+	var attributes = code.documentElement.attributes;
+	for(var i = 0;i<attributes.length;i++)
+	{
+		var attribute = attributes[i];
+		if(attribute.name.indexOf('xmlns') != -1)
+		{
+			svg.setAttribute(attribute.name, attribute.value);
+		}
+	}
+	
 	// store original values
 	docWidth = parseFloat(code.documentElement.getAttribute('width'));
 	docHeight = parseFloat(code.documentElement.getAttribute('height'));
@@ -241,6 +252,9 @@ function setupsvg() {
 			return false;
 		}
 	}
+	
+	//console.log("svg: ",svg);
+	
 	//console.groupEnd();
 }
 
@@ -750,7 +764,13 @@ function buildsvg()
 	
 	// convert all non-defs node to svgnodes
 	var nodelist = code.documentElement.childNodes;
-	for (var i=0; i<nodelist.length;i++) if(nodelist[i].tagName!='defs') svg.appendChild(p2c(nodelist[i]));
+	for (var i=0; i<nodelist.length;i++)
+	{
+		if(nodelist[i].tagName && nodelist[i].tagName!='defs')
+		{
+			svg.appendChild(p2c(nodelist[i]));
+		}
+	}
 	
 	// setup image in html
 	document.getElementById('result_title').innerHTML = 'image';
@@ -1362,8 +1382,7 @@ function p2c(node) {
 	
 	// create svg node
 	var svgnode = svg.ownerDocument.createElementNS('http://www.w3.org/2000/svg', element);
-	
-	for (name in attributes)
+		for (name in attributes)
 	{
 		var nameParts = name.split(':');
 		if(nameParts.length == 2)
@@ -1373,10 +1392,14 @@ function p2c(node) {
 	}
 	
 	// convert the node's children to svgnodes
-	if (node.childNodes) if (node.childNodes.length) for(var i=0; i<node.childNodes.length; i++) switch(node.childNodes[i].nodeType) {
-		case 1: svgnode.appendChild(p2c(node.childNodes[i])); break;
+	if (node.childNodes) if (node.childNodes.length) for(var i=0; i<node.childNodes.length; i++) switch(node.childNodes[i].nodeType) 	{
+		case 1: 
+			if(node.childNodes[i].tagName)
+				svgnode.appendChild(p2c(node.childNodes[i])); 
+			break;
 		case 3: svgnode.appendChild(svg.ownerDocument.createTextNode(node.childNodes[i].nodeValue));
 	}
+	
 	if (index[selected]==node) dragnode = svgnode;
 	//console.log("node: ",node);
 	//console.log("svgnode: ",svgnode);
@@ -1618,7 +1641,7 @@ function getCode(node) {
 				}
 				
 				// remove tabs/spaces before elements you get when loading existing svg's
-				newCode = newCode.replace(/\s+/,'\n');
+				newCode = newCode.replace(/^\s+/,'\n\n');
 				
 				code += newCode;
 		}

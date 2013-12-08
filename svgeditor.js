@@ -46,7 +46,7 @@ var docWidth;
 var docHeight;
 
 
-function init(demo) {
+function init(xml) {
 	//console.group("init");
 	ieV = getInternetExplorerVersion();
 	if(ieV > -1)
@@ -58,7 +58,7 @@ function init(demo) {
 	if(ieV == -1 || ieV >= 9.0)
 	{
 		// setup example code, build index and setup svg image
-		code = loadxml(demo ? '<svg width="210mm" height="297mm" transform=""><defs><ref param="size" default="100"/><ref param="dist" default="0.4*size"/><ref param="mood" default="0"/><ref param="x" default="105"/></defs><title>smiley</title><desc>example code for parametric SVG editor</desc><rect x="0" y="0" width="210" height="297" style="fill:none;stroke:#87cccc;"/>\n\n<circle cx="{x}" cy="105" r="{size}" style="fill:yellow;stroke:black;stroke-width:3"/><g transform="translate({x} 95)"><title>eyes</title><circle cx="{-dist}" cy="0" r="{size/10}" style="fill:black; stroke:black;"/>\n\n<circle cx="{dist}" cy="0" r="{size/10}" style="fill:black; stroke:black;"/></g><g transform="translate({x} 105)"><title>mouth</title><path d="M{-size/2},{+size/2} a 2 1 0 0 {mood} {size},0" style="fill:none;stroke:black;stroke-width:3"/></g></svg>' : '<svg width="210mm" height="297mm" transform=""><defs></defs><title>new project</title><desc></desc></svg>');
+		code = loadxml(xml ? xml : '<svg width="210mm" height="297mm" transform=""><defs></defs><title>new project</title><desc></desc></svg>');
 		buildindex();
 		setupsvg();
 		createSelectionSVG();
@@ -1384,6 +1384,7 @@ function p2c(node) {
 	var svgnode = svg.ownerDocument.createElementNS('http://www.w3.org/2000/svg', element);
 		for (name in attributes)
 	{
+		console.log( name );
 		var nameParts = name.split(':');
 		if(nameParts.length == 2)
 			svgnode.setAttributeNS(nameParts[0], nameParts[1], attributes[name]);

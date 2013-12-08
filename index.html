@@ -6,8 +6,18 @@
 		<link rel="stylesheet" type="text/css" href="css/forms.css" />
 		<link rel="stylesheet" type="text/css" href="css/svg.css" />
 		<script type="text/javascript" src="svgeditor.js"></script>
+		<script type="text/javascript">
+			function onLoad() {
+				var client = new XMLHttpRequest();
+				client.open('GET', 'cutting_plans/SumoBot_Jr.psvg');
+				client.onreadystatechange = function() {
+					init( client.responseText );
+				}
+				client.send();
+			}
+		</script>
 	</head>
-	<body onload="init(true);">
+	<body onload="onLoad()">
 		<div id="outerContainer">
 		<div id="container">
 			<h1>parametric SVG editor (beta)<span id="title"></span></h1>

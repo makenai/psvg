@@ -14,6 +14,7 @@ var me     = require('..')
         '--app=http://localhost:' + port
       , '--disk-cache-size 0'
       , '--no-proxy-server'
+      , '--app-window-size=1024,540'
     ]
 
 if (file && fs.existsSync(file) && !fs.statSync(file).isFile()) {

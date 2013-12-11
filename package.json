@@ -1,33 +1,38 @@
 {
-  "name": "psvg",
-  "version": "0.1.0",
-  "description": "A parametric SVG editor, creator, and compiler based on the work of Harmen Zijp, Peter Uithoven and others.",
-  "main": "lib/server.js",
-  "bin": {
+    "name": "psvg"
+  , "version": "0.1.0"
+  , "description": "A parametric SVG editor, creator, and compiler based on the work of Harmen Zijp, Peter Uithoven and others."
+  , "main": "lib/server.js"
+  , "dependencies" : {
+          "optimist"      : "~0.6.0"
+        , "shoe"          : "~0.0.15"
+        , "st"            : "~0.2.2"
+      }
+  , "bin": {
     "psvg": "./bin/psvg.js"
-  },
-  "scripts": {
+  }
+  , "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
+  }
+  , "repository": {
     "type": "git",
     "url": "https://github.com/makenai/psvg.git"
-  },
-  "keywords": [
+  }
+  , "keywords": [
     "svg",
     "editor",
     "parametric"
-  ],
-  "authors": [
+  ]
+  , "authors": [
     "Pawel Szymczykowski <makenai@gmail.com> (http://makenai.net)",
     "Harmen G. Zijp <svg@giplt.nl> (http://www.giplt.nl/)", 
     "Peter Uithoven <peteruithoven@gmail.com> (http://www.peteruithoven.nl)"
-  ],
-  "licenses": [
+  ]
+  , "licenses": [
    { "type": "SimPL-2.0",
      "url": "http://opensource.org/licenses/simpl-2.0" }
-  ],
-  "bugs": {
+  ]
+  , "bugs": {
     "url": "https://github.com/makenai/psvg/issues"
   }
 }

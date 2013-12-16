@@ -9,7 +9,7 @@
 		<script type="text/javascript">
 			function onLoad() {
 				var client = new XMLHttpRequest();
-				client.open('GET', 'cutting_plans/SumoBot_Jr.psvg');
+				client.open('GET', '/file');
 				client.onreadystatechange = function() {
 					init( client.responseText );
 				}

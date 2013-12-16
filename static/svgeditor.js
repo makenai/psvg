@@ -58,7 +58,7 @@ function init(xml) {
 	if(ieV == -1 || ieV >= 9.0)
 	{
 		// setup example code, build index and setup svg image
-		code = loadxml(xml ? xml : '<svg width="210mm" height="297mm" transform=""><defs></defs><title>new project</title><desc></desc></svg>');
+		code = loadxml( xml || '<svg width="210mm" height="297mm" transform=""><defs></defs><title>new project</title><desc></desc></svg>');
 		buildindex();
 		setupsvg();
 		createSelectionSVG();
@@ -512,7 +512,11 @@ function getChildByTitle(svgNode,title)
 	{
 		var child = childNodes[i];
 		if(child.tagName != "g" && child.tagName != "svg:g") continue;
-		var groupChildNodes = child.childNodes;
+		
+		if(getNodeTitle(child) == title)
+			return child;
+		
+		/*var groupChildNodes = child.childNodes;
 		for(var j=0;j<groupChildNodes.length;j++)
 		{
 			var groupChild = groupChildNodes[j];
@@ -525,7 +529,7 @@ function getChildByTitle(svgNode,title)
 					return child;
 				}
 			}
-		}
+		}*/
 	}
 	//console.groupEnd();
 }
@@ -539,9 +543,12 @@ function update(element) {
 		
 			var editTitleNode = document.getElementById('edittitle');
 			// update parametric svg code
-			setNodeXML(code.getElementsByTagName('title')[0], editTitleNode.value);
+			//setNodeXML(code.getElementsByTagName('title')[0], editTitleNode.value);
+			//console.log("code: ",code);
+			setNodeTitle(code.firstChild,editTitleNode.value);
 			// update title 
 			document.getElementById('title').innerHTML = editTitleNode.value;
+			//console.log(document);
 			
 			if(resultState == RESULT_STATE_SAVE)
 			{
@@ -597,12 +604,19 @@ function update(element) {
 		case 'params':
 			defs = code.getElementsByTagName('defs')[0];
 			while(defs.childNodes.length) defs.removeChild(defs.childNodes[0]);
-			lines = document.getElementById('params').value.replace(/ /g,'').split("\n");
+			var params = document.getElementById('params').value;
+			//console.log("params: ",params);
+			//params = params.replace(/ /g,'');
+			params = params.replace(/ ?= ?/g,'=');
+			//console.log("  params: ",params);
+			lines = params.split("\n");
 			for (var i=0; i<lines.length; i++) if (lines[i]) {
 				newnode = code.createElement('ref');
 				attributes = lines[i].split("=");
 				newnode.setAttribute('param', attributes[0])
-				newnode.setAttribute('default', attributes[1])
+				var paramValue = attributes[1];
+				//console.log("paramValue: ",paramValue);
+				newnode.setAttribute('default', paramValue)
 				defs.appendChild(newnode)
 			}
 			break;
@@ -650,9 +664,7 @@ function addobject(name) {
 	if (name) {
 		newgroup = code.createElement('g');
 		newgroup.setAttribute('transform', 'translate(0 0)');
-		var title = code.createElement('title')
-		title.appendChild(code.createTextNode(name));
-		newgroup.appendChild(title);
+		setNodeTitle(newgroup,name);
 		parentNode.appendChild(newgroup);
 		selected = getId(newgroup);
 		buildindex();
@@ -672,8 +684,12 @@ function removeobject() {
 }
 
 function renameobject() {
+	//console.group('renameobject');
+	//console.log("selected: ",selected);
 	var selectedSVG = index[selected];
+	//console.log("selectedSVG: ",selectedSVG)
 	var name = prompt('enter new name', getNodeTitle(selectedSVG));
+	//console.log('name: ',name)
 	while(nameExists(selectedSVG,name) && name != getNodeTitle(selectedSVG)) name = prompt('name exists, please try a different name', name);
 	if (name) {
 		setNodeTitle(selectedSVG,name);
@@ -681,6 +697,7 @@ function renameobject() {
 		buildindex();
 		select(selected);
 	}
+	//console.groupEnd();
 }
 function duplicateObject() {
 	var selectedSVG = index[selected];
@@ -757,7 +774,24 @@ function buildsvg()
 	//console.group("buildsvg");
 	// set parameters, i.e. evaluate names and values for variables defined in the 'defs' node
 	var defs = code.getElementsByTagName('defs')[0];
-	if (defs) for (var i=0; i<defs.childNodes.length; i++) if (defs.childNodes[i].nodeType == 1) eval(defs.childNodes[i].getAttribute('param') + '=' + defs.childNodes[i].getAttribute('default') +';');
+	if (defs)
+	{
+		for (var i=0; i<defs.childNodes.length; i++)
+		{
+			if (defs.childNodes[i].nodeType == 1) 
+			{
+				var param = defs.childNodes[i];
+				var paramName = param.getAttribute('param');
+				var paramValue = param.getAttribute('default');
+				//console.log("paramName: ",paramName);
+				//console.log("paramValue: ",paramValue);
+				paramValue = fillInVariables(paramValue);
+				//console.log("  paramValue: ",paramValue);
+				eval(paramName + '=' + paramValue +';'); //TODO: BIG risk of overriding core variables
+			}
+		}
+	}
+	//console.log("dist: ",dist);
 	
 	// empty svg node
 	while(svg.childNodes.length) svg.removeChild(svg.childNodes[0]);
@@ -839,14 +873,54 @@ function gotoHelp()
 	document.getElementById('result').innerHTML = 'loading...';
 }
 
-function checkTitles(node, id) {
-	if (!getNodeTitle(node)) {
-		var title = node.ownerDocument.createElement('title')
-		title.appendChild(node.ownerDocument.createTextNode(id ? 'sub' + id : 'new'));
-		node.appendChild(title);
+// check if titles are precent, if not create
+function checkTitles(node, title) {
+	var inkscapeTitle = getNodeInkscapeTitle(node);
+	if(inkscapeTitle)
+	{
+		title = inkscapeTitle;
+		setNodeTitle(node,title);
 	}
-	var id = 1;
-	for (var i=0;i<node.childNodes.length; i++) if (node.childNodes[i].tagName == 'g') checkTitles(node.childNodes[i], id++);
+	else
+	{
+		if (!getNodeTitle(node))
+		{
+			var oldTitle = getNodeOldTitle(node); //check for title in old system
+			if(oldTitle)
+			{
+				title = oldTitle;
+			}
+			else
+			{
+				title = (title ? 'sub' + title : 'new');
+			}
+			setNodeTitle(node,title);
+		}
+		
+	}
+	
+	title = 1;
+	for (var i=0;i<node.childNodes.length; i++)
+	{
+		if (node.childNodes[i].tagName == 'g')
+		{
+			checkTitles(node.childNodes[i], title++);
+		}
+	}
+}
+function getNodeOldTitle(node)
+{
+	var titleNodes = getFirstChildrenByTagName(node,"title");
+	if(titleNodes.length > 0)
+		return titleNodes[0].childNodes[0].nodeValue;
+	return "";
+}
+function getNodeInkscapeTitle(node)
+{
+	if(node.getAttributeNS)
+		return node.getAttributeNS('http://www.inkscape.org/namespaces/inkscape','label');
+	else
+		return '';
 }
 
 function loadFileFromServer(filename) {
@@ -860,7 +934,8 @@ function loadFileFromServer(filename) {
 					code = loadxml(ajaxRequest.responseText);
 					checkTitles(code.documentElement);
 					if (!getDescription(code.documentElement)) {
-						var desc = code.createElement('title')
+						//var desc = code.createElement('title')
+						var desc = code.createElement('desc')
 						desc.appendChild(code.createTextNode(''));
 						code.documentElement.appendChild(desc);
 					}
@@ -1310,13 +1385,37 @@ function p2c(node) {
 	var attributes = new Array();
 	
 	// replace all curly brackets with their evaluated content
-	if (node.attributes) if (node.attributes.length) for (var i=0; i<node.attributes.length; i++) {
+	/*if (node.attributes) if (node.attributes.length) for (var i=0; i<node.attributes.length; i++) {
 		if (node.attributes[i].name == 'transform') {
 			var translate = getTranslate(node);
 			var transform = (translate ? node.attributes[i].value.replace(/translate\(.*?\)/, 'translate({' + translate.px + (translate.x<0?'':'+') + translate.x + '} {' + translate.py + (translate.y<0?'':'+') + translate.y + '})') : node.attributes[i].value);
 			attributes[node.attributes[i].name] = transform.replace(/({.*?})/g, function(match) { return eval(match); } );
 		}
 		else attributes[node.attributes[i].name] = node.attributes[i].value.replace(/({.*?})/g, function(match) { return eval(match); } );
+	}*/
+	if (node.attributes && node.attributes.length)
+	{
+		for (var i=0; i<node.attributes.length; i++) 
+		{
+			var attribute = node.attributes[i];
+			if (element == "g" && attribute.name == 'transform')
+			{
+				var translate = getTranslate(node);
+				var translateX = translate.px + (translate.x<0?'':'+') + translate.x;
+				var translateY = translate.py + (translate.y<0?'':'+') + translate.y;
+				var transform = ''
+				if(translate)
+					transform = attribute.value.replace(/translate\(.*?\)/, 'translate({' + translateX + '} {' + translateY + '})');
+				else
+					transform = attribute.value;
+				
+				attributes[attribute.name] = fillInVariables(transform);
+			}
+			else
+			{
+				attributes[attribute.name] = fillInVariables(attribute.value);
+			};
+		}
 	}
 	
 	// check elements for non standard attributes: fingerjoint, mill
@@ -1384,12 +1483,17 @@ function p2c(node) {
 	var svgnode = svg.ownerDocument.createElementNS('http://www.w3.org/2000/svg', element);
 		for (name in attributes)
 	{
-		console.log( name );
 		var nameParts = name.split(':');
-		if(nameParts.length == 2)
+		if(nameParts.length == 2){
 			svgnode.setAttributeNS(nameParts[0], nameParts[1], attributes[name]);
-		else
-			svgnode.setAttributeNS(null, name, attributes[name]);
+		} else {
+		  // console.log("name: ",name);
+		  //console.log("attributes[name]: ",attributes[name]);
+		  if(name != "xmlns") 
+		  { // TODO: check why needed
+				svgnode.setAttributeNS(null, name, attributes[name]);
+			}
+		}
 	}
 	
 	// convert the node's children to svgnodes
@@ -1407,6 +1511,13 @@ function p2c(node) {
 	//console.groupEnd();
 	
 	return svgnode;
+}
+function fillInVariables(argument)
+{
+	//console.log("argument: ",argument);
+	argument = argument.replace(/({[^}]*})/g, function(match) { return eval(match) }); 
+	//console.log("new argument: ",argument);
+	return argument;
 }
 
 function loadedSvgPreview(currentPreview,fileURL)
@@ -1576,14 +1687,19 @@ function nameExists(node,name)
 }
 function getNodeTitle(node)
 {
-	var titleNodes = getFirstChildrenByTagName(node,"title");
-	if(titleNodes.length > 0)
-		return titleNodes[0].childNodes[0].nodeValue;
-	return "";
+	
+	//console.log("node: ",node);
+	if(node.getAttributeNS)
+		return node.getAttributeNS(null,'id');
+	else
+		return '';
 }
 function setNodeTitle(node, title)
 {
-	getFirstChildrenByTagName(node,"title")[0].childNodes[0].nodeValue = title;
+	//getFirstChildrenByTagName(node,"title")[0].childNodes[0].nodeValue = title;
+	node.setAttributeNS(null,'id',title);
+	node.setAttributeNS('http://www.inkscape.org/namespaces/inkscape','label',title);
+	//console.log(node);
 }
 function getFirstChildrenByTagName(node, tagName)
 {

@@ -10,6 +10,7 @@ var me     = require('..')
   , port   = 2000 + Math.round(Math.random() * 5000)
 
   , bin    = 'google-chrome'
+  // http://peter.sh/experiments/chromium-command-line-switches/
   , args   = [
         '--app=http://localhost:' + port
       , '--disk-cache-size 0'

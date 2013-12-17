@@ -7,6 +7,7 @@
           "optimist"      : "~0.6.0"
         , "shoe"          : "~0.0.15"
         , "st"            : "~0.2.2"
+        , "formidable"    : "~1.0.14"
       }
   , "bin": {
     "psvg": "./bin/psvg.js"

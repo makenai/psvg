@@ -75,7 +75,7 @@ function buildindex()
 {	
 	//if(//console) console.log("buildindex");
 	index = addToIndex(code.documentElement, new Array());
-	document.getElementById('title').innerHTML = getNodeTitle(code.documentElement);
+	document.getElementById('title').innerHTML = getFilename();
 	document.getElementById('index_title').innerHTML = 'index';
 	var html = '<div class="indexItem" id="project" onclick="select(\'project\');">project settings</div>';
 	html += '<div class="indexItem" id="parameters" onclick="select(\'parameters\');">&#160;&#160;parameters</div>';
@@ -557,7 +557,7 @@ function update(element) {
 				var filenameLibrary = document.getElementById('filenameLibrary');
 				filenameLibrary.value = editTitleNode.value+psvgE;
 				//console.log("filenameLibrary.value: ",filenameLibrary.value);
-				validateSaveForm();
+				// validateSaveForm();
 			}
 			//console.log("resultState: ",resultState);
 			//console.log("  resultState: ",resultState);
@@ -1004,21 +1004,21 @@ function gotoLoad()
 	html+= '<iframe id="upload_target" name="upload_target" src="" style="width:0;height:0;border:0px solid #fff;"></iframe>';
 	html+= '</form>';
 	html+= '</div>';
-	html+= '<hr/>';
-	html+= '<div>';
-	html+= '<h3>load svg code from online template library</h3>';
-	html+= '';
-	html+= '<label>category</label> <span id="libraryCategories">loading...</span>';
-	html+= '<div id="libraryFiles">';
+	// html+= '<hr/>';
+	// html+= '<div>';
+	// html+= '<h3>load svg code from online template library</h3>';
+	// html+= '';
+	// html+= '<label>category</label> <span id="libraryCategories">loading...</span>';
+	// html+= '<div id="libraryFiles">';
 	//html+= '<tr><th></th><td id="libraryFiles"><input type="submit" id="load" value="load" onclick="loadFileFromServer(\'library/\' + document.getElementById(\'loadCategory\').value + \'/\' +document.getElementById(\'loadFile\').value);"  title="import file" disabled="true"/></td></tr>';
-	html+= '</div>';
-	html+= '<span id="progressbar"></span>';
-	menu = '<input type="button" class="button" value="&#215;" onclick="buildsvg();" title="close load menu" />';
-	document.getElementById('result_title').innerHTML = 'load code';
-	document.getElementById('result_menu').innerHTML = menu;
-	document.getElementById('result').setAttribute('class', 'help');
-	document.getElementById('result').innerHTML = html;
-	ajaxGet('svg.php?id=getLibraryCategories&purpose=load', 'libraryCategories');
+	// html+= '</div>';
+	// html+= '<span id="progressbar"></span>';
+	// menu = '<input type="button" class="button" value="&#215;" onclick="buildsvg();" title="close load menu" />';
+	// document.getElementById('result_title').innerHTML = 'load code';
+	// document.getElementById('result_menu').innerHTML = menu;
+	// document.getElementById('result').setAttribute('class', 'help');
+	// document.getElementById('result').innerHTML = html;
+	// ajaxGet('svg.php?id=getLibraryCategories&purpose=load', 'libraryCategories');
 }
 
 
@@ -1157,10 +1157,10 @@ function gotoExport()
 	//console.log("resultState: ",resultState);
 	
 	html = '<p>export svg code to disk</p>';
-	html+= '<label>filename</label><input type="text" name="filename" id="filenameDisk" value="' + getNodeTitle(code.documentElement) + svgE+'"/><input type="button" class="button" value="save to disk" onclick="exportFile();"/>';
+	html+= '<label>filename</label><input type="text" name="filename" id="filenameDisk" value="' + getFilename().replace('.psvg','.svg') +'"/><input type="button" class="button" value="save to disk" onclick="exportFile();"/>';
 	
-	html+= '<form id="downloadform" action="svg.php?id=downloadFile" method="post">';
-	html+= '<input type="hidden" name="filename" id="filenameDownload" value="' + getNodeTitle(code.documentElement) + svgE+'"/>';
+	html+= '<form id="downloadform" action="/save" method="post">';
+	html+= '<input type="hidden" name="filename" id="filenameDownload" value="' + getFilename().replace('.psvg','.svg') + '"/>';
 	html+= '<input type="hidden" id="downloadcode" name="code" value=""/>';
 	html+= '</form>';
 	
@@ -1188,31 +1188,30 @@ function gotoSave(filetype)
 
 	html = '<div>';
 	html+= '<h3>save parametric svg code to disk</h3>';
-	html+= '<label>filename</label><input type="text" name="filename" id="filenameDisk" value="' + getNodeTitle(code.documentElement) + psvgE+'"/><input type="button" class="button" value="save to disk" onclick="saveFile();"/>';
-	html+= '<form id="downloadform" action="svg.php?id=downloadFile" method="post">';
-	html+= '<input type="hidden" name="filename" id="filenameDownload" value="' + getNodeTitle(code.documentElement) + psvgE+'"/>';
+	html+= '<label>filename</label><input type="text" name="filename" id="filenameDisk" value="' + getFilename().replace('.svg','.psvg') + '"/><input type="button" class="button" value="save to disk" onclick="saveFile();"/>';
+	html+= '<form id="downloadform" action="/save" method="post">';
+	html+= '<input type="hidden" name="filename" id="filenameDownload" value="' + getFilename().replace('.svg','.psvg') +'"/>';
 	html+= '<input type="hidden" id="downloadcode" name="code" value=""/>';
 	html+= '</form>';
 	html+= '</div>';
-	html+= '<hr/>';
-	html+= '<div>';
-	html+= '<h3>save svg code to online template library</h3>';
-	html+= '<form id="uploadform" action="svg.php?id=uploadFile&destination=server" method="post" enctype="multipart/form-data">';
-	html+= '<label>title</label><input type="text" name="title" id="saveTitle" value="'+document.getElementById('edittitle').value+'" onchange="update(\'saveTitle\');"/>';
-	html+= '<label>your name</label><input type="text" name="name" id="name" value="" onchange="validateSaveForm();"/>';
-	html+= '<label>email address</label><input type="text" name="email" id="email" value="" onchange="validateSaveForm();"/>';
-	html+= '<label>&nbsp;</label><input type="checkbox" class="checkbox" name="newsletter" value="newsletter" /><span>inform me about updates</span>';
 
+	// html+= '<hr/>';
+	// html+= '<div>';
+	// html+= '<h3>save svg code to online template library</h3>';
+	// html+= '<form id="uploadform" action="svg.php?id=uploadFile&destination=server" method="post" enctype="multipart/form-data">';
+	// html+= '<label>title</label><input type="text" name="title" id="saveTitle" value="'+document.getElementById('edittitle').value+'" onchange="update(\'saveTitle\');"/>';
+	// html+= '<label>your name</label><input type="text" name="name" id="name" value="" onchange="validateSaveForm();"/>';
+	// html+= '<label>email address</label><input type="text" name="email" id="email" value="" onchange="validateSaveForm();"/>';
+	// html+= '<label>&nbsp;</label><input type="checkbox" class="checkbox" name="newsletter" value="newsletter" /><span>inform me about updates</span>';
 	//html+= '<label>filename</label><input type="text" name="filename" id="filenameLibrary" value="' + getNodeTitle(code.documentElement) + psvgE+'" onchange="validateSaveForm();"/>';
-	html+= '<label>category</label><span id="libraryCategories">loading...</span>';
-	html+= '<label>&nbsp;</label>';
-	html+= '<input type="button" class="button" id="save" value="save to library" onclick="startUpload();" disabled="disabled"/>';
-	
-	html+= '<input type="hidden" name="filename" id="filenameLibrary" value="' + getNodeTitle(code.documentElement) + psvgE+'" />';
-	html+= '<input type="hidden" id="uploadcode" name="uploadcode" value=""/>';
-	html+= '<input type="hidden" id="svgcode" name="svgcode" value=""/>';
-	html+= '<iframe id="upload_target" name="upload_target" src="" style="width:0;height:0;border:0px solid #fff;"></iframe>';
-	html+= '</form>';
+	// html+= '<label>category</label><span id="libraryCategories">loading...</span>';
+	// html+= '<label>&nbsp;</label>';
+	// html+= '<input type="button" class="button" id="save" value="save to library" onclick="startUpload();" disabled="disabled"/>';	
+	// html+= '<input type="hidden" name="filename" id="filenameLibrary" value="' + getNodeTitle(code.documentElement) + psvgE+'" />';
+	// html+= '<input type="hidden" id="uploadcode" name="uploadcode" value=""/>';
+	// html+= '<input type="hidden" id="svgcode" name="svgcode" value=""/>';
+	// html+= '<iframe id="upload_target" name="upload_target" src="" style="width:0;height:0;border:0px solid #fff;"></iframe>';
+	// html+= '</form>';
 		
 	html+= '<span id="progressbar"></span>';
 	html+= '</div>';
@@ -1221,9 +1220,9 @@ function gotoSave(filetype)
 	document.getElementById('result_menu').innerHTML = menu;
 	document.getElementById('result').setAttribute('class', 'help');
 	document.getElementById('result').innerHTML = html;
-	ajaxGet('svg.php?id=getLibraryCategories&purpose=save', 'libraryCategories');
+	// ajaxGet('svg.php?id=getLibraryCategories&purpose=save', 'libraryCategories');
 	
-	validateSaveForm();
+	// validateSaveForm();
 }
 
 // convert text into DOM XML object
@@ -1693,6 +1692,9 @@ function getNodeTitle(node)
 		return node.getAttributeNS(null,'id');
 	else
 		return '';
+}
+function getFilename() {
+	return document.getElementById('editor').getAttribute("data-filename")
 }
 function setNodeTitle(node, title)
 {

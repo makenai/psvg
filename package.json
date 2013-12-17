@@ -1,6 +1,6 @@
 {
     "name": "psvg"
-  , "version": "0.1.0"
+  , "version": "0.1.1"
   , "description": "A parametric SVG editor, creator, and compiler based on the work of Harmen Zijp, Peter Uithoven and others."
   , "main": "lib/server.js"
   , "dependencies" : {
@@ -24,6 +24,7 @@
     "editor",
     "parametric"
   ]
+  , "preferGlobal" : true
   , "authors": [
     "Pawel Szymczykowski <makenai@gmail.com> (http://makenai.net)",
     "Harmen G. Zijp <svg@giplt.nl> (http://www.giplt.nl/)", 

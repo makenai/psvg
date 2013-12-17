@@ -971,11 +971,11 @@ function saveFileToServer(html) {
 function startUpload(){
 	//console.group("startUpload");
 	//console.log("code: ",code);
-	document.getElementById('uploadcode').value = getNodeXML(code);
-	document.getElementById('svgcode').value = getNodeXML(svg);
+	// document.getElementById('uploadcode').value = getNodeXML(code);
+	// document.getElementById('svgcode').value = getNodeXML(svg);
 	document.getElementById('progressbar').innerHTML = 'uploading...';
 	document.getElementById('uploadform').style.visibility = 'hidden';
-	document.getElementById('uploadform').target = 'upload_target';
+	// document.getElementById('uploadform').target = 'upload_target';
 	document.getElementById('uploadform').submit();
 	//console.groupEnd();
 	return true;
@@ -997,11 +997,11 @@ function gotoLoad()
 
 	html = '<div>';
 	html+= '<h3>load svg code from disk</h3>';
-	html+= '<form id="uploadform" action="svg.php?id=uploadFile&destination=client" method="post" enctype="multipart/form-data">';
+	html+= '<form id="uploadform" action="/load" method="post" enctype="multipart/form-data">';
 	html+= '<input type="file" name="loadfile" size="20" onchange="startUpload();"/>';
-	html+= '<input type="hidden" id="uploadcode" name="uploadcode" value=""/>';
-	html+= '<input type="hidden" id="svgcode" name="svgcode" value=""/>';
-	html+= '<iframe id="upload_target" name="upload_target" src="" style="width:0;height:0;border:0px solid #fff;"></iframe>';
+	// html+= '<input type="hidden" id="uploadcode" name="uploadcode" value=""/>';
+	// html+= '<input type="hidden" id="svgcode" name="svgcode" value=""/>';
+	// html+= '<iframe id="upload_target" name="upload_target" src="" style="width:0;height:0;border:0px solid #fff;"></iframe>';
 	html+= '</form>';
 	html+= '</div>';
 	// html+= '<hr/>';
@@ -1012,12 +1012,12 @@ function gotoLoad()
 	// html+= '<div id="libraryFiles">';
 	//html+= '<tr><th></th><td id="libraryFiles"><input type="submit" id="load" value="load" onclick="loadFileFromServer(\'library/\' + document.getElementById(\'loadCategory\').value + \'/\' +document.getElementById(\'loadFile\').value);"  title="import file" disabled="true"/></td></tr>';
 	// html+= '</div>';
-	// html+= '<span id="progressbar"></span>';
-	// menu = '<input type="button" class="button" value="&#215;" onclick="buildsvg();" title="close load menu" />';
-	// document.getElementById('result_title').innerHTML = 'load code';
-	// document.getElementById('result_menu').innerHTML = menu;
-	// document.getElementById('result').setAttribute('class', 'help');
-	// document.getElementById('result').innerHTML = html;
+	html+= '<span id="progressbar"></span>';
+	menu = '<input type="button" class="button" value="&#215;" onclick="buildsvg();" title="close load menu" />';
+	document.getElementById('result_title').innerHTML = 'load code';
+	document.getElementById('result_menu').innerHTML = menu;
+	document.getElementById('result').setAttribute('class', 'help');
+	document.getElementById('result').innerHTML = html;
 	// ajaxGet('svg.php?id=getLibraryCategories&purpose=load', 'libraryCategories');
 }
 
@@ -1694,7 +1694,7 @@ function getNodeTitle(node)
 		return '';
 }
 function getFilename() {
-	return document.getElementById('editor').getAttribute("data-filename")
+	return document.getElementById('editor').getAttribute("data-filename").split('/').pop()
 }
 function setNodeTitle(node, title)
 {

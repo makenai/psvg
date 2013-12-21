@@ -1162,6 +1162,7 @@ function gotoExport()
 	html+= '<form id="downloadform" action="/save" method="post">';
 	html+= '<input type="hidden" name="filename" id="filenameDownload" value="' + getFilename().replace('.psvg','.svg') + '"/>';
 	html+= '<input type="hidden" id="downloadcode" name="code" value=""/>';
+	html+= '<input type="hidden" name="save_type" value="export"/>';
 	html+= '</form>';
 	
 	html+= '<span id="progressbar"></span>';
@@ -1192,6 +1193,7 @@ function gotoSave(filetype)
 	html+= '<form id="downloadform" action="/save" method="post">';
 	html+= '<input type="hidden" name="filename" id="filenameDownload" value="' + getFilename().replace('.svg','.psvg') +'"/>';
 	html+= '<input type="hidden" id="downloadcode" name="code" value=""/>';
+	html+= '<input type="hidden" name="save_type" value="save"/>';
 	html+= '</form>';
 	html+= '</div>';
 
@@ -1397,7 +1399,8 @@ function p2c(node) {
 		for (var i=0; i<node.attributes.length; i++) 
 		{
 			var attribute = node.attributes[i];
-			if (element == "g" && attribute.name == 'transform')
+			// TODO : Fix this.
+			if (false && element == "g" && attribute.name == 'transform')
 			{
 				var translate = getTranslate(node);
 				var translateX = translate.px + (translate.x<0?'':'+') + translate.x;

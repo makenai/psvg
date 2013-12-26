@@ -164,7 +164,7 @@ function setupsvg() {
 	docWidth = parseFloat(code.documentElement.getAttribute('width'));
 	docHeight = parseFloat(code.documentElement.getAttribute('height'));
 	units = code.documentElement.getAttribute('width').replace(/[0-9 ]*/ig,"");
-	
+
 	//console.log("docWidth: ",docWidth);
 	//console.log("docHeight: ",docHeight);
 	//console.log("units: ",units);
@@ -778,7 +778,7 @@ function buildsvg()
 	{
 		for (var i=0; i<defs.childNodes.length; i++)
 		{
-			if (defs.childNodes[i].nodeType == 1) 
+			if (defs.childNodes[i].nodeType == 1 && defs.childNodes[i].nodeName == 'ref') 
 			{
 				var param = defs.childNodes[i];
 				var paramName = param.getAttribute('param');

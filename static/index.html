@@ -11,7 +11,9 @@
 				var client = new XMLHttpRequest();
 				client.open('GET', '/file');
 				client.onreadystatechange = function() {
-					init( client.responseText );
+					if (client.readyState==4 && client.status==200) {
+						init( client.responseText );
+					}
 				}
 				client.send();
 			}

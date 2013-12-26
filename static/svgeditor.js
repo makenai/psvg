@@ -146,9 +146,10 @@ function setupsvg() {
 	svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 	//svg = document.createElement('svg');
 	
+	svg.setAttribute('version', '1.1');
 	svg.setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink');
 	svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
-	
+
 	// add other namespaces from original file
 	var attributes = code.documentElement.attributes;
 	for(var i = 0;i<attributes.length;i++)
@@ -1399,7 +1400,7 @@ function p2c(node) {
 		for (var i=0; i<node.attributes.length; i++) 
 		{
 			var attribute = node.attributes[i];
-			// TODO : Fix this.
+			// TODO : Fix this, or find out why needed -PS
 			if (false && element == "g" && attribute.name == 'transform')
 			{
 				var translate = getTranslate(node);
@@ -1487,7 +1488,9 @@ function p2c(node) {
 	{
 		var nameParts = name.split(':');
 		if(nameParts.length == 2){
-			svgnode.setAttributeNS(nameParts[0], nameParts[1], attributes[name]);
+			if ( nameParts[0] == 'xlink' ) {
+				svgnode.setAttributeNS('http://www.w3.org/1999/xlink', nameParts[1], attributes[name]);
+			}
 		} else {
 		  // console.log("name: ",name);
 		  //console.log("attributes[name]: ",attributes[name]);

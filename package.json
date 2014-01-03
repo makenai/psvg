@@ -1,6 +1,6 @@
 {
   "name": "psvg",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A parametric SVG editor, creator, and compiler based on the work of Harmen Zijp, Peter Uithoven and others.",
   "main": "lib/server.js",
   "dependencies": {
